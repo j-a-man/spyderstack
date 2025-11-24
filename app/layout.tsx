@@ -1,20 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, DM_Sans } from "next/font/google"
+// 1. Import ONLY DM Sans (Anthem uses a single clean font family)
+import { DM_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import "./globals.css"
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-})
-
+// 2. Configure DM Sans to be your "Sans" font (Body text)
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-  variable: "--font-display",
+  variable: "--font-sans", // <--- IMPORTANT: Mapping this to 'font-sans' changes the body text
   display: "swap",
 })
 
@@ -30,9 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${dmSans.variable} font-sans antialiased bg-black`}>
+      {/* 3. Apply the variable */}
+      <body className={`${dmSans.variable} font-sans antialiased bg-black`}>
         <SmoothScroll>
-          {/* Footer is REMOVED from here to prevent duplication */}
           {children}
         </SmoothScroll>
         <Analytics />

@@ -5,9 +5,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { ChevronDown, X } from "lucide-react"
-import Image from "next/image" // <--- Added Import
+import Image from "next/image"
 
-// Links visible on the navbar
+// Links visible on the navbar (Desktop only)
 const visibleNavItems = [
   { href: "/about", label: "About Us" },
   { href: "/portfolio", label: "Portfolio" },
@@ -33,7 +33,7 @@ export function Header() {
     setIsOpen(false)
   }, [pathname])
 
-  // Handle scroll effect for the navbar
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -58,10 +58,9 @@ export function Header() {
         
         {/* LEFT: Company Name & Logo */}
         <Link href="/" className="flex items-center gap-3 group relative z-[60]">
-          {/* CHANGED: Replaced CSS circle with Image component */}
           <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
              <Image 
-               src="/spider.png" // <--- CHANGE THIS to your logo file path (e.g. "/my-logo.png")
+               src="/placeholder-logo.png" 
                alt="SpyderStack Logo"
                fill
                className="object-contain"
@@ -75,7 +74,7 @@ export function Header() {
         {/* RIGHT: Nav Links + Menu Button */}
         <div className="flex items-center gap-8 relative z-[60]">
           
-          {/* The 3 Visible Links */}
+          {/* Desktop Links (Hidden on Mobile) */}
           <nav className="hidden md:flex items-center gap-8">
             {visibleNavItems.map((item) => (
               <Link
@@ -88,7 +87,7 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Menu Toggle */}
+          {/* Menu Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
@@ -106,15 +105,21 @@ export function Header() {
           </button>
         </div>
 
-        {/* DROPDOWN CARD (Floating Below) */}
+        {/* DROPDOWN CARD */}
         <div
           className={cn(
-            "absolute right-0 w-[420px] bg-primary text-white shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] origin-top-right z-[70]",
-            "rounded-[2.5rem] p-10",
-            isScrolled ? "top-[calc(100%+1rem)]" : "top-full mt-6",
+            // MOBILE OPTIMIZATION:
+            // - w-[calc(100vw-2rem)]: Takes up full width minus padding on mobile
+            // - right-[-1rem] (if inside container with padding) or right-0
+            // - max-w-[420px]: Limits width on desktop/tablet
+            "absolute top-full mt-4 right-0", 
+            "w-[calc(100vw-3rem)] md:w-[420px]", // Responsive Width
+            "bg-primary text-white shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] origin-top-right z-[70]",
+            "rounded-[2rem] p-8 md:p-10", // Slightly smaller padding on mobile
+            
             isOpen 
-              ? "opacity-100 scale-100 translate-y-0" 
-              : "opacity-0 scale-90 -translate-y-4 pointer-events-none"
+              ? "opacity-100 scale-100 translate-y-0 visible" 
+              : "opacity-0 scale-90 -translate-y-4 invisible pointer-events-none"
           )}
         >
           {/* Decorative Patterns */}
@@ -127,10 +132,10 @@ export function Header() {
               <Link
                 key={item.id}
                 href={item.href}
-                className="group flex items-baseline gap-6 py-4 border-b border-white/10 hover:border-white/30 transition-colors"
+                className="group flex items-baseline gap-4 md:gap-6 py-3 md:py-4 border-b border-white/10 hover:border-white/30 transition-colors"
               >
-                <span className="text-xs font-bold font-display opacity-50 w-6 text-white/70">{item.id}</span>
-                <span className="text-2xl font-bold font-display tracking-tight group-hover:translate-x-2 transition-transform duration-300">
+                <span className="text-[10px] md:text-xs font-bold font-display opacity-50 w-6 text-white/70">{item.id}</span>
+                <span className="text-xl md:text-2xl font-bold font-display tracking-tight group-hover:translate-x-2 transition-transform duration-300">
                   {item.label}
                 </span>
               </Link>
@@ -138,7 +143,7 @@ export function Header() {
           </nav>
 
           {/* Footer Links */}
-          <div className="mt-8 pt-4 flex flex-col gap-2 text-[10px] font-bold uppercase tracking-widest opacity-60 pl-12 text-white">
+          <div className="mt-6 md:mt-8 pt-4 flex flex-col gap-2 text-[10px] font-bold uppercase tracking-widest opacity-60 pl-10 md:pl-12 text-white">
              <Link href="/privacy" className="hover:opacity-100 transition-opacity">Privacy Policy</Link>
              <Link href="/terms" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
           </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
 import { Footer } from "@/components/footer"
@@ -21,7 +21,6 @@ const getDates = () => {
     return dates
 }
 
-// Generate times (8am to 10pm EST)
 const times = [
     "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
     "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM",
@@ -32,7 +31,8 @@ export default function SchedulePage() {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null)
     const [selectedTime, setSelectedTime] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
-    const [step, setStep] = useState(1) // 1: Select Time, 2: Details, 3: Success
+    const [step, setStep] = useState(1)
+    const [bookings, setBookings] = useState<Record<string, number>>({})
 
     const [formData, setFormData] = useState({
         name: "",
@@ -41,6 +41,22 @@ export default function SchedulePage() {
     })
 
     const dates = getDates()
+
+    // Fetch availability on load
+    useEffect(() => {
+        const fetchBookings = async () => {
+            try {
+                const res = await fetch('/api/book')
+                if (res.ok) {
+                    const data = await res.json()
+                    setBookings(data)
+                }
+            } catch (e) {
+                console.error("Failed to fetch bookings")
+            }
+        }
+        fetchBookings()
+    }, [])
 
     const handleBooking = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -65,13 +81,19 @@ export default function SchedulePage() {
                 return
             }
 
-            // Success
             setStep(3)
         } catch (error) {
             alert("An error occurred. Please try again.")
         } finally {
             setLoading(false)
         }
+    }
+
+    // Helper to check if a slot is full (>= 3 bookings)
+    const isSlotFull = (time: string) => {
+        if (!selectedDate) return false
+        const key = `${selectedDate.toLocaleDateString()}-${time}`
+        return (bookings[key] || 0) >= 3
     }
 
     return (
@@ -105,13 +127,10 @@ export default function SchedulePage() {
                     <div className="bg-background border border-white/10 shadow-2xl relative overflow-hidden min-h-[600px] flex flex-col md:flex-row">
                         {/* Top Progress Bar (Mobile) */}
                         <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 md:hidden">
-                            <div
-                                className="h-full bg-primary transition-all duration-500"
-                                style={{ width: `${(step / 3) * 100}%` }}
-                            />
+                            <div className="h-full bg-primary transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }} />
                         </div>
 
-                        {/* LEFT SIDE: Summary / Info */}
+                        {/* LEFT SIDE: Summary */}
                         <div className="md:w-1/3 bg-white/5 border-r border-white/10 p-8 md:p-12 flex flex-col justify-between">
                             <div>
                                 <h3 className="font-display text-2xl font-bold text-white mb-2">DEPLOYMENT BRIEF</h3>
@@ -144,13 +163,10 @@ export default function SchedulePage() {
                                 </div>
                             </div>
 
-                            <div className="mt-12 md:mt-0">
+                            <div className="mt-12 md:mt-0 hidden md:block">
                                 <div className="text-xs text-muted-foreground uppercase tracking-widest mb-2">Step {step} of 3</div>
                                 <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                                    <div
-                                        className="h-full bg-primary transition-all duration-500 ease-out"
-                                        style={{ width: `${(step / 3) * 100}%` }}
-                                    />
+                                    <div className="h-full bg-primary transition-all duration-500 ease-out" style={{ width: `${(step / 3) * 100}%` }} />
                                 </div>
                             </div>
                         </div>
@@ -168,7 +184,7 @@ export default function SchedulePage() {
                                         {dates.map((date, i) => (
                                             <button
                                                 key={i}
-                                                onClick={() => setSelectedDate(date)}
+                                                onClick={() => { setSelectedDate(date); setSelectedTime(null); }}
                                                 className={cn(
                                                     "p-4 border text-center transition-all duration-300 hover:scale-105",
                                                     selectedDate?.toDateString() === date.toDateString()
@@ -190,22 +206,26 @@ export default function SchedulePage() {
                                     <div className="space-y-4">
                                         <div className="text-xs uppercase tracking-widest text-muted-foreground">Available Slots (EST)</div>
                                         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                                            {times.map((time, i) => (
-                                                <button
-                                                    key={i}
-                                                    onClick={() => setSelectedTime(time)}
-                                                    disabled={!selectedDate}
-                                                    className={cn(
-                                                        "py-2 px-1 text-sm border transition-all duration-200",
-                                                        selectedTime === time
-                                                            ? "bg-white text-black border-white font-bold"
-                                                            : "bg-transparent border-white/10 text-muted-foreground hover:border-white/30 hover:text-white",
-                                                        !selectedDate && "opacity-30 cursor-not-allowed"
-                                                    )}
-                                                >
-                                                    {time}
-                                                </button>
-                                            ))}
+                                            {times.map((time, i) => {
+                                                const full = isSlotFull(time)
+                                                return (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => setSelectedTime(time)}
+                                                        disabled={!selectedDate || full}
+                                                        className={cn(
+                                                            "py-2 px-1 text-sm border transition-all duration-200 relative overflow-hidden",
+                                                            selectedTime === time
+                                                                ? "bg-white text-black border-white font-bold"
+                                                                : "bg-transparent border-white/10 text-muted-foreground hover:border-white/30 hover:text-white",
+                                                            (!selectedDate || full) && "opacity-30 cursor-not-allowed border-transparent bg-white/5"
+                                                        )}
+                                                    >
+                                                        {time}
+                                                        {full && <div className="absolute inset-0 flex items-center justify-center bg-black/80 text-[10px] font-bold text-red-500 uppercase">FULL</div>}
+                                                    </button>
+                                                )
+                                            })}
                                         </div>
                                     </div>
 

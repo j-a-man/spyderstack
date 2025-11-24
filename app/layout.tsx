@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-// 1. Import DM Sans instead of Rajdhani
 import { Inter, DM_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
@@ -12,7 +11,6 @@ const inter = Inter({
   display: "swap",
 })
 
-// 2. Configure DM Sans for Headings
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "700"],
@@ -32,9 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      {/* 3. Apply the new variable */}
-      <body className={`${inter.variable} ${dmSans.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${dmSans.variable} font-sans antialiased bg-black`}>
         <SmoothScroll>
+          {/* Footer is REMOVED from here to prevent duplication */}
           {children}
         </SmoothScroll>
         <Analytics />

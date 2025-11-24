@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+import Image from "next/image"
 
 const footerLinks = {
   company: [
@@ -45,9 +46,14 @@ export function Footer() {
           {/* Brand Column */}
           <div className="md:col-span-5">
             <Link href="/" className="flex items-center gap-3 group mb-6">
-              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                <div className="w-2.5 h-2.5 bg-black rounded-full" />
-              </div>
+              <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
+                           <Image 
+                             src="/spider.png" // <--- CHANGE THIS to your logo file path (e.g. "/my-logo.png")
+                             alt="SpyderStack Logo"
+                             fill
+                             className="object-contain"
+                           />
+                        </div>
               <span className="text-2xl font-bold tracking-tighter text-white uppercase font-display">
                 SpyderStack
               </span>

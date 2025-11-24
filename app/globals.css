@@ -79,10 +79,11 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground selection:bg-primary/30 selection:text-white;
+    /* ADDED: 'tracking-tight' to reduce letter spacing globally */
+    @apply bg-background text-foreground tracking-tight;
   }
   
   /* Typography Updates */

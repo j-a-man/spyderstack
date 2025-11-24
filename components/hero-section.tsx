@@ -1,56 +1,68 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Network } from "lucide-react"
+import { ArrowRight } from "lucide-react"
+import Image from "next/image"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4">
-      <div className="container mx-auto text-center max-w-5xl">
-        <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-8 glow-cyan">
-          <Network className="w-4 h-4 text-primary" />
-          <span className="text-sm text-muted-foreground">Premium Automation for Contractors</span>
-        </div>
-
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-balance leading-tight">
-          Stop Letting Leads <span className="text-primary glow-cyan inline-block">Slip Through</span> The Cracks
-        </h1>
-
-        <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto text-balance leading-relaxed">
-          Build a web that catches every opportunity. Automated missed call responses, reputation management, and
-          instant quotes for HVAC, roofing, and plumbing contractors.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button size="lg" className="glow-cyan text-base font-semibold group">
-            Start Catching Leads
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button size="lg" variant="outline" className="glass text-base font-semibold bg-transparent">
-            Watch Demo
-          </Button>
-        </div>
-
-        <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-          <div className="text-center">
-            <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-2">98%</div>
-            <div className="text-sm text-muted-foreground">Response Rate</div>
-          </div>
-          <div className="text-center border-x border-border/40">
-            <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-2">2min</div>
-            <div className="text-sm text-muted-foreground">Avg Response Time</div>
-          </div>
-          <div className="text-center">
-            <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-2">$50k+</div>
-            <div className="text-sm text-muted-foreground">Avg Revenue Saved</div>
-          </div>
-        </div>
+    // Added 'sticky top-0' and 'z-0' to participate in the stacking effect
+    <section className="sticky top-0 z-0 min-h-screen flex flex-col justify-center pt-20 overflow-hidden bg-background">
+      
+      {/* Background Image Overlay */}
+      <div className="absolute inset-0 z-0 opacity-20">
+         {/* Replace src with your own local image if you have one */}
+         <Image 
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+            alt="Infrastructure Background" 
+            fill
+            className="object-cover grayscale"
+            priority
+         />
+         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary/40 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+      <div className="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10 px-6">
+        
+        <div className="flex flex-col justify-center pt-12">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-[2px] w-12 bg-primary" />
+            <span className="text-primary tracking-[0.2em] text-sm font-bold uppercase">
+              System Operational
+            </span>
+          </div>
+
+          <h1 className="font-display text-7xl md:text-9xl font-bold leading-[0.85] tracking-tighter mb-8 text-white">
+            BUILDING <br />
+            <span className="text-outline">DIGITAL</span> <br />
+            BRIDGES.
+          </h1>
+
+          <p className="text-xl text-muted-foreground max-w-xl leading-relaxed mb-10">
+            SpyderStack is the automation infrastructure that connects lost leads to signed contracts. 
+            Secure your revenue stream today.
+          </p>
+
+          <div className="flex flex-wrap gap-0">
+            <Button className="h-16 px-10 text-lg rounded-none bg-primary hover:bg-primary/90 uppercase tracking-widest font-bold transition-all hover:pl-12">
+              Deploy Infrastructure <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </div>
         </div>
+
+        {/* Right Side: Architectural Graphic or 3D element */}
+        <div className="hidden lg:flex items-end justify-end pb-12">
+            <div className="bg-card/80 backdrop-blur-md p-8 border border-white/10 w-full max-w-md">
+                <div className="flex justify-between items-end mb-4">
+                    <span className="text-6xl font-display font-bold text-white">98<span className="text-primary">%</span></span>
+                    <span className="text-sm text-muted-foreground uppercase tracking-widest mb-2 text-right">Capture<br/>Efficiency</span>
+                </div>
+                <div className="h-1 w-full bg-white/10">
+                    <div className="h-full w-[98%] bg-primary" />
+                </div>
+            </div>
+        </div>
+
       </div>
     </section>
   )

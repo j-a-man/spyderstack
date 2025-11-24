@@ -41,7 +41,7 @@ export function NetworkBackground() {
     }
 
     const animate = () => {
-      ctx.fillStyle = "rgba(10, 10, 10, 0.05)"
+      ctx.fillStyle = "rgba(5, 5, 10, 0.1)"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Update and draw nodes
@@ -64,7 +64,7 @@ export function NetworkBackground() {
 
           if (distance < 150) {
             const opacity = 1 - distance / 150
-            ctx.strokeStyle = `rgba(6, 182, 212, ${opacity * 0.3})`
+            ctx.fillStyle = "rgba(5, 5, 10, 0.1)"
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(node.x, node.y)

@@ -60,7 +60,7 @@ export function Header() {
         <Link href="/" className="flex items-center gap-3 group relative z-[60]">
           <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
              <Image 
-               src="/placeholder-logo.png" 
+               src="/spider.png" 
                alt="SpyderStack Logo"
                fill
                className="object-contain"

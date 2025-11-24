@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import "./globals.css"
 
+import { ThemeProvider } from "@/components/theme-provider"
+
 // 2. Configure DM Sans to be your "Sans" font (Body text)
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -25,13 +27,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       {/* 3. Apply the variable */}
-      <body className={`${dmSans.variable} font-sans antialiased bg-black`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
-        <Analytics />
+      <body className={`${dmSans.variable} font-sans antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

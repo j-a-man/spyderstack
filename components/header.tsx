@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils"
 import { ChevronDown, X } from "lucide-react"
 import Image from "next/image"
 
+import { ModeToggle } from "@/components/mode-toggle"
+
 // Links visible on the navbar (Desktop only)
 const visibleNavItems = [
   { href: "/about", label: "About Us" },
@@ -53,54 +55,56 @@ export function Header() {
     >
       <div className={cn(
         "mx-auto flex items-center justify-between relative",
-        isScrolled ? "max-w-full" : "max-w-[1400px]" 
+        isScrolled ? "max-w-full" : "max-w-[1400px]"
       )}>
-        
+
         {/* LEFT: Company Name & Logo */}
         <Link href="/" className="flex items-center gap-3 group relative z-[60]">
           <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
-             <Image 
-               src="/spider.png" 
-               alt="SpyderStack Logo"
-               fill
-               className="object-contain"
-             />
+            <Image
+              src="/spider.png"
+              alt="SpyderStack Logo"
+              fill
+              className="object-contain"
+            />
           </div>
-          <span className="text-xl font-bold tracking-tighter text-white uppercase font-display drop-shadow-md">
+          <span className="text-xl font-bold tracking-tighter text-foreground uppercase font-display drop-shadow-md">
             SpyderStack
           </span>
         </Link>
 
         {/* RIGHT: Nav Links + Menu Button */}
-        <div className="flex items-center gap-8 relative z-[60]">
-          
+        <div className="flex items-center gap-4 relative z-[60]">
+
           {/* Desktop Links (Hidden on Mobile) */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8 mr-4">
             {visibleNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-bold text-white/80 hover:text-white transition-colors uppercase tracking-widest drop-shadow-sm"
+                className="text-sm font-bold text-foreground/80 hover:text-foreground transition-colors uppercase tracking-widest drop-shadow-sm"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
+          <ModeToggle />
+
           {/* Menu Toggle Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-white transition-all duration-300 group uppercase tracking-widest text-xs font-bold",
-              "border border-white/20",
+              "flex items-center gap-2 px-4 py-2 rounded-full text-foreground transition-all duration-300 group uppercase tracking-widest text-xs font-bold",
+              "border border-foreground/10",
               "hover:bg-primary hover:border-primary hover:text-white"
             )}
           >
             {isOpen ? "Close" : "Menu"}
             {isOpen ? (
-               <X className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90" />
+              <X className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90" />
             ) : (
-               <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" />
+              <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" />
             )}
           </button>
         </div>
@@ -112,13 +116,13 @@ export function Header() {
             // - w-[calc(100vw-2rem)]: Takes up full width minus padding on mobile
             // - right-[-1rem] (if inside container with padding) or right-0
             // - max-w-[420px]: Limits width on desktop/tablet
-            "absolute top-full mt-4 right-0", 
+            "absolute top-full mt-4 right-0",
             "w-[calc(100vw-3rem)] md:w-[420px]", // Responsive Width
             "bg-primary text-white shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] origin-top-right z-[70]",
             "rounded-[2rem] p-8 md:p-10", // Slightly smaller padding on mobile
-            
-            isOpen 
-              ? "opacity-100 scale-100 translate-y-0 visible" 
+
+            isOpen
+              ? "opacity-100 scale-100 translate-y-0 visible"
               : "opacity-0 scale-90 -translate-y-4 invisible pointer-events-none"
           )}
         >
@@ -144,8 +148,9 @@ export function Header() {
 
           {/* Footer Links */}
           <div className="mt-6 md:mt-8 pt-4 flex flex-col gap-2 text-[10px] font-bold uppercase tracking-widest opacity-60 pl-10 md:pl-12 text-white">
-             <Link href="/privacy" className="hover:opacity-100 transition-opacity">Privacy Policy</Link>
-             <Link href="/terms" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
+            <Link href="/privacy" className="hover:opacity-100 transition-opacity">Privacy Policy</Link>
+            <Link href="/terms" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
+            <Link href="/cookies" className="hover:opacity-100 transition-opacity">Cookie Policy</Link>
           </div>
         </div>
 

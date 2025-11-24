@@ -6,10 +6,37 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Colors remain the same */
-  --background: oklch(0.15 0.04 250); 
+  /* Light Mode (Refined) */
+  --background: oklch(0.985 0.005 240);
+  /* Subtle cool gray */
+  --foreground: oklch(0.15 0.04 250);
+  --card: oklch(1 0 0);
+  /* Pure white for cards */
+  --card-foreground: oklch(0.15 0.04 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.04 250);
+  --primary: oklch(0.6 0.18 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.15 0.04 250);
+  --muted: oklch(0.96 0.01 250);
+  --muted-foreground: oklch(0.45 0.02 250);
+  --accent: oklch(0.96 0.01 250);
+  --accent-foreground: oklch(0.15 0.04 250);
+  --destructive: oklch(0.6 0.2 30);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.92 0.02 250);
+  --input: oklch(0.92 0.02 250);
+  --ring: oklch(0.6 0.18 250);
+  --radius: 0rem;
+  --outline-color: rgba(0, 0, 0, 0.4);
+}
+
+.dark {
+  /* Dark Mode (Original) */
+  --background: oklch(0.15 0.04 250);
   --foreground: oklch(0.95 0.01 250);
-  --card: oklch(0.20 0.04 250); 
+  --card: oklch(0.20 0.04 250);
   --card-foreground: oklch(0.98 0 0);
   --popover: oklch(0.20 0.04 250);
   --popover-foreground: oklch(0.98 0 0);
@@ -26,13 +53,13 @@
   --border: oklch(0.30 0.04 250);
   --input: oklch(0.25 0.04 250);
   --ring: oklch(0.6 0.18 250);
-  --radius: 0rem;
+  --outline-color: rgba(255, 255, 255, 0.4);
 }
 
 @theme inline {
   /* 1. Map font-sans to the variable we set in layout.tsx */
-  --font-sans: var(--font-sans), "Arial", sans-serif; 
-  
+  --font-sans: var(--font-sans), "Arial", sans-serif;
+
   /* 2. Map font-display to the same font (Anthem style consistency) */
   --font-display: var(--font-sans), "Arial", sans-serif;
 
@@ -61,9 +88,9 @@
   .panel {
     @apply bg-[var(--background)] border-t border-white/10 shadow-2xl;
   }
-  
+
   .text-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4);
+    -webkit-text-stroke: 1px var(--outline-color);
     color: transparent;
   }
 }
@@ -72,12 +99,23 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     /* 3. Set default tracking to normal/wide like the image */
     @apply bg-background text-foreground font-sans tracking-normal;
   }
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     /* 4. Remove uppercase, keep it bold and clean */
     @apply font-display font-bold tracking-tight;
+  }
+
+  p {
+    @apply text-lg;
   }
 }

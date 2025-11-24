@@ -1,93 +1,140 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
+import { Footer } from "@/components/footer"
 
-export const metadata = {
-  title: "About Us | SpyderStack",
-  description: "Learn about SpyderStack's mission to help contractors never miss another lead",
+// CHANGED: New Centered "Manifesto" Layout
+function AboutHero() {
+  return (
+    <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background">
+      
+      {/* Background: Technical Grid & Radial Glow (Distinct from Home) */}
+      <div className="absolute inset-0 z-0">
+         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
+         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      </div>
+
+      <div className="container mx-auto max-w-5xl relative z-10 px-6 text-center">
+          
+          {/* Badge Style Label */}
+          <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <span className="inline-block text-primary tracking-[0.2em] text-xs font-bold uppercase border border-primary/30 px-6 py-2 rounded-full bg-primary/5 backdrop-blur-md">
+              About SpyderStack
+            </span>
+          </div>
+
+          {/* Centered Massive Title */}
+          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tighter mb-10 text-white animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            THE <span className="text-primary">DIGITAL</span> <br />
+            BACKBONE.
+          </h1>
+
+          {/* Centered Narrative Paragraph */}
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
+            We are on a mission to ensure no contractor ever loses a lead again. 
+            Building the infrastructure for businesses that build the world.
+          </p>
+      </div>
+    </section>
+  )
+}
+
+function OurStory() {
+  return (
+    <section className="relative z-10 bg-background border-t border-white/5 py-24">
+      <div className="container mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          
+          {/* Left: Title Sticky */}
+          <div className="md:sticky md:top-32">
+            <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+              OUR <span className="text-primary">ORIGIN</span>
+            </h2>
+            <div className="h-1 w-24 bg-white shadow-[0_0_15px_rgba(255,255,255,0.5)] mb-8" />
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              SpyderStack was born from a simple observation: contractors are some of the hardest working people in America, yet they lose thousands every month to missed calls.
+            </p>
+          </div>
+
+          {/* Right: Content */}
+          <div className="space-y-12">
+            <div className="bg-white/5 p-8 border border-white/10 hover:border-primary/50 transition-colors duration-500 group">
+              <h3 className="text-2xl font-display font-bold text-white mb-4 group-hover:text-primary transition-colors">The Problem</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                While you're up on a roof, under a sink, or installing an HVAC system, potential customers are calling. By the time you check your voicemail, they've already hired someone else.
+              </p>
+            </div>
+
+            <div className="bg-white/5 p-8 border border-white/10 hover:border-primary/50 transition-colors duration-500 group">
+              <h3 className="text-2xl font-display font-bold text-white mb-4 group-hover:text-primary transition-colors">The Solution</h3>
+              <p className="text-muted-foreground leading-relaxed">
+                We built an intelligent automation web that catches every lead instantly. No more phone tag. No more lost revenue. Just booked jobs.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function ValuesSection() {
+  const values = [
+    { title: "RELIABILITY", desc: "Just like the structures you build, our systems are engineered to last. Rock-solid uptime, always on." },
+    { title: "SIMPLICITY", desc: "Complex problems don't need complex solutions. We make powerful enterprise technology simple to use." },
+    { title: "RESULTS", desc: "We measure our success by your bank account. More leads caught, more jobs booked, more revenue earned." },
+  ]
+
+  return (
+    <section className="relative z-10 bg-background border-t border-white/5 py-32">
+      <div className="container mx-auto max-w-7xl px-6">
+        <div className="mb-20 text-center">
+          <h2 className="font-display text-5xl md:text-7xl font-bold text-white mb-4">CORE VALUES</h2>
+          <div className="h-1 w-24 bg-primary mx-auto" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {values.map((value, i) => (
+            <div key={i} className="group relative overflow-hidden bg-white/5 p-10 border border-white/10 hover:bg-primary transition-all duration-500 hover:scale-105 hover:shadow-2xl">
+              <h3 className="text-3xl font-display font-bold text-white mb-4 group-hover:text-white">{value.title}</h3>
+              <p className="text-muted-foreground leading-relaxed group-hover:text-white/90">
+                {value.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <NetworkBackground />
+    <main className="relative bg-black min-h-screen">
+      {/* Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <NetworkBackground />
+      </div>
+
       <Header />
 
-      <main className="relative pt-32 pb-20">
-        <div className="container mx-auto px-4 max-w-5xl">
-          {/* Hero Section */}
-          <div className="text-center mb-20">
-            <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-balance">
-              Building The <span className="text-primary">Future</span> Of Contractor Tech
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              We're on a mission to ensure no contractor ever loses a lead again
-            </p>
-          </div>
+      {/* Hero Section (Z-10) */}
+      <div className="relative z-10">
+        <AboutHero />
+      </div>
 
-          {/* Story Section */}
-          <div className="glass p-8 md:p-12 rounded-xl mb-12">
-            <h2 className="font-display text-3xl font-bold mb-6 text-primary">Our Story</h2>
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                SpyderStack was born from a simple observation: contractors are some of the hardest working people in
-                America, yet they're losing thousands of dollars every month to missed phone calls.
-              </p>
-              <p>
-                While they're up on roofs, under sinks, or installing HVAC systems, potential customers are calling and
-                getting voicemail. By the time the contractor finishes the job and checks their phone, those leads have
-                already hired someone else.
-              </p>
-              <p>
-                We knew there had to be a better way. So we built SpyderStack—an intelligent automation system that
-                catches every lead, responds instantly, and turns missed calls into booked jobs.
-              </p>
-            </div>
-          </div>
+      {/* Content Sections (Z-20) */}
+      <div className="relative z-20 bg-background">
+        <OurStory />
+        <ValuesSection />
+      </div>
 
-          {/* Mission & Vision */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="glass p-8 rounded-xl">
-              <h2 className="font-display text-2xl font-bold mb-4 text-primary">Our Mission</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                To empower contractors with cutting-edge automation technology that captures every opportunity, so they
-                can focus on what they do best—delivering exceptional service.
-              </p>
-            </div>
-            <div className="glass p-8 rounded-xl">
-              <h2 className="font-display text-2xl font-bold mb-4 text-primary">Our Vision</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                A world where every contractor has enterprise-level technology at their fingertips, leveling the playing
-                field and helping small businesses compete with the big players.
-              </p>
-            </div>
-          </div>
-
-          {/* Values */}
-          <div className="glass p-8 md:p-12 rounded-xl">
-            <h2 className="font-display text-3xl font-bold mb-8 text-primary">Our Values</h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <h3 className="font-display text-xl font-bold mb-3">Reliability</h3>
-                <p className="text-muted-foreground">
-                  Just like the contractors we serve, we're built to last. Our systems are rock-solid and always on.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-bold mb-3">Simplicity</h3>
-                <p className="text-muted-foreground">
-                  Complex problems don't need complex solutions. We make powerful technology simple to use.
-                </p>
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-bold mb-3">Results</h3>
-                <p className="text-muted-foreground">
-                  We measure our success by your success. More leads caught, more jobs booked, more revenue earned.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
+      {/* Footer (Z-30) */}
+      <div className="relative z-30">
+        <Footer />
+      </div>
+    </main>
   )
 }

@@ -1,14 +1,15 @@
 "use client"
 
 import type React from "react"
-
+import { useState } from "react"
 import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
+import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { useState } from "react"
+import { Mail, Phone, Clock, ArrowRight } from "lucide-react"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,7 +24,6 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log("[v0] Contact form submitted:", formData)
-    // Form submission logic would go here
     alert("Thanks for reaching out! We'll get back to you within 24 hours.")
     setFormData({ name: "", email: "", phone: "", company: "", industry: "", message: "" })
   }
@@ -33,190 +33,219 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <NetworkBackground />
+    <main className="relative min-h-screen bg-black selection:bg-primary selection:text-white">
+      {/* Fixed Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <NetworkBackground />
+      </div>
+
       <Header />
 
-      <main className="relative pt-32 pb-20">
-        <div className="container mx-auto px-4 max-w-6xl">
-          {/* Hero Section */}
-          <div className="text-center mb-16">
-            <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-balance">
-              Let's <span className="text-primary">Connect</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
-              Have questions? Want to see a demo? We're here to help you capture every lead.
-            </p>
+      {/* 1. HERO SECTION (Manifesto Style) */}
+      <section className="relative z-10 pt-40 pb-20 px-6 border-b border-white/5 overflow-hidden">
+        {/* Technical Grid Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
+           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        </div>
+
+        <div className="container mx-auto max-w-7xl text-center relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-sm font-bold tracking-widest uppercase text-white/80">
+              Communications Open
+            </span>
           </div>
+          
+          <h1 className="font-display text-6xl md:text-8xl font-bold text-white mb-8 tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+            INITIATE <span className="text-primary">CONTACT</span>.
+          </h1>
+          
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+            Ready to deploy your infrastructure? Our engineering team is standing by to architect your solution.
+          </p>
+        </div>
+      </section>
 
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <div className="glass p-8 md:p-10 rounded-xl">
-              <h2 className="font-display text-2xl font-bold mb-6">Send Us A Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Name *</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Smith"
-                    className="bg-background/60"
-                  />
-                </div>
+      {/* 2. CONTACT GRID */}
+      <section className="relative z-10 py-24 bg-background">
+        <div className="container mx-auto max-w-7xl px-6">
+          <div className="grid lg:grid-cols-12 gap-16">
+            
+            {/* LEFT: Contact Form (Technical Panel) */}
+            <div className="lg:col-span-7">
+              <div className="bg-white/5 border border-white/10 p-8 md:p-12 relative overflow-hidden group transition-all hover:border-primary/30">
+                <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                
+                <h2 className="font-display text-3xl font-bold text-white mb-8 tracking-wide">TRANSMISSION FORM</h2>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Name *</Label>
+                      <Input
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder="John Smith"
+                        className="bg-black/40 border-white/10 h-12 focus:border-primary rounded-none text-white placeholder:text-white/20"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Email *</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="john@example.com"
+                        className="bg-black/40 border-white/10 h-12 focus:border-primary rounded-none text-white placeholder:text-white/20"
+                      />
+                    </div>
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email *</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="john@example.com"
-                    className="bg-background/60"
-                  />
-                </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Phone</Label>
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="(555) 123-4567"
+                        className="bg-black/40 border-white/10 h-12 focus:border-primary rounded-none text-white placeholder:text-white/20"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="company" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Company</Label>
+                      <Input
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Your Company Name"
+                        className="bg-black/40 border-white/10 h-12 focus:border-primary rounded-none text-white placeholder:text-white/20"
+                      />
+                    </div>
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone</Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="(555) 123-4567"
-                    className="bg-background/60"
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="industry" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Industry</Label>
+                    <select
+                      id="industry"
+                      name="industry"
+                      value={formData.industry}
+                      onChange={handleChange}
+                      className="w-full px-3 h-12 bg-black/40 border border-white/10 text-white focus:border-primary focus:outline-none rounded-none appearance-none"
+                    >
+                      <option value="" className="bg-black text-muted-foreground">Select an industry</option>
+                      <option value="hvac" className="bg-black">HVAC</option>
+                      <option value="roofing" className="bg-black">Roofing</option>
+                      <option value="plumbing" className="bg-black">Plumbing</option>
+                      <option value="landscaping" className="bg-black">Landscaping</option>
+                      <option value="electrical" className="bg-black">Electrical</option>
+                      <option value="other" className="bg-black">Other</option>
+                    </select>
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder="Your Company Name"
-                    className="bg-background/60"
-                  />
-                </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="message" className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Message *</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      placeholder="Tell us about your business infrastructure..."
+                      rows={5}
+                      className="bg-black/40 border-white/10 focus:border-primary rounded-none resize-none text-white placeholder:text-white/20"
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="industry">Industry</Label>
-                  <select
-                    id="industry"
-                    name="industry"
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 rounded-md bg-background/60 border border-input text-foreground"
-                  >
-                    <option value="">Select an industry</option>
-                    <option value="hvac">HVAC</option>
-                    <option value="roofing">Roofing</option>
-                    <option value="plumbing">Plumbing</option>
-                    <option value="landscaping">Landscaping</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Tell us about your business and how we can help..."
-                    rows={5}
-                    className="bg-background/60 resize-none"
-                  />
-                </div>
-
-                <Button type="submit" className="w-full glow-cyan font-semibold">
-                  Send Message
-                </Button>
-              </form>
+                  <Button type="submit" className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-lg hover:shadow-[0_0_30px_-5px_var(--primary)] transition-all">
+                    Send Message <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </form>
+              </div>
             </div>
 
-            {/* Contact Info */}
-            <div className="space-y-8">
-              {/* Quick Contact */}
-              <div className="glass p-8 rounded-xl">
-                <h3 className="font-display text-xl font-bold mb-6 text-primary">Get In Touch</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 mt-1 text-primary">📧</div>
+            {/* RIGHT: Info & FAQ */}
+            <div className="lg:col-span-5 space-y-12">
+              
+              {/* Direct Line */}
+              <div>
+                <h3 className="font-display text-2xl font-bold text-white mb-6 border-b border-white/10 pb-4 tracking-wide">DIRECT LINE</h3>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 transition-colors">
+                      <Mail className="w-5 h-5 text-primary" />
+                    </div>
                     <div>
-                      <div className="font-semibold mb-1">Email</div>
-                      <a href="mailto:hello@spyderstack.com" className="text-muted-foreground hover:text-foreground">
+                      <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Email</div>
+                      <a href="mailto:hello@spyderstack.com" className="text-lg text-white hover:text-primary transition-colors font-display font-bold tracking-wide">
                         hello@spyderstack.com
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 mt-1 text-primary">📞</div>
+
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 transition-colors">
+                      <Phone className="w-5 h-5 text-primary" />
+                    </div>
                     <div>
-                      <div className="font-semibold mb-1">Phone</div>
-                      <a href="tel:+15551234567" className="text-muted-foreground hover:text-foreground">
+                      <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Phone</div>
+                      <a href="tel:+15551234567" className="text-lg text-white hover:text-primary transition-colors font-display font-bold tracking-wide">
                         (555) 123-4567
                       </a>
                     </div>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 mt-1 text-primary">⏰</div>
+
+                  <div className="flex items-start gap-4 group">
+                    <div className="w-12 h-12 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 transition-colors">
+                      <Clock className="w-5 h-5 text-primary" />
+                    </div>
                     <div>
-                      <div className="font-semibold mb-1">Hours</div>
-                      <div className="text-muted-foreground">Mon-Fri: 8am - 6pm PST</div>
-                      <div className="text-muted-foreground">Sat-Sun: 10am - 4pm PST</div>
+                      <div className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">Operations</div>
+                      <div className="text-white font-bold font-display tracking-wide">Mon-Fri: 8am - 6pm PST</div>
+                      <div className="text-muted-foreground text-sm mt-1">Sat-Sun: 10am - 4pm PST</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* FAQ */}
-              <div className="glass p-8 rounded-xl">
-                <h3 className="font-display text-xl font-bold mb-6 text-primary">Quick Questions?</h3>
-                <div className="space-y-4 text-sm">
+              {/* FAQ Panel */}
+              <div className="bg-white/5 border border-white/10 p-8 hover:border-primary/30 transition-colors duration-500">
+                <h3 className="font-display text-xl font-bold text-white mb-6 tracking-wide">SYSTEM FAQ</h3>
+                <div className="space-y-6">
                   <div>
-                    <div className="font-semibold mb-1">How quickly can I get set up?</div>
-                    <div className="text-muted-foreground">
-                      Most contractors are up and running in under 15 minutes.
+                    <div className="text-sm font-bold text-primary mb-2 uppercase tracking-wide">How fast is deployment?</div>
+                    <div className="text-muted-foreground text-sm leading-relaxed">
+                      Most contractors are fully integrated and capturing leads in under 15 minutes.
                     </div>
                   </div>
+                  <div className="w-full h-px bg-white/10" />
                   <div>
-                    <div className="font-semibold mb-1">Do I need technical expertise?</div>
-                    <div className="text-muted-foreground">
-                      Not at all. SpyderStack is designed to be simple and intuitive.
-                    </div>
-                  </div>
-                  <div>
-                    <div className="font-semibold mb-1">Can I try it before I buy?</div>
-                    <div className="text-muted-foreground">
-                      Yes! We offer a 14-day free trial with no credit card required.
+                    <div className="text-sm font-bold text-primary mb-2 uppercase tracking-wide">Is it complex to operate?</div>
+                    <div className="text-muted-foreground text-sm leading-relaxed">
+                      Zero technical skill required. The infrastructure runs autonomously in the background.
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Call to Action */}
-              <div className="glass p-8 rounded-xl bg-primary/5 border-primary/20">
-                <h3 className="font-display text-xl font-bold mb-3">Ready to get started?</h3>
-                <p className="text-muted-foreground mb-6">
-                  See SpyderStack in action with a personalized demo for your business.
-                </p>
-                <Button className="w-full glow-cyan font-semibold">Schedule a Demo</Button>
-              </div>
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <div className="relative z-20">
+        <Footer />
+      </div>
+    </main>
   )
 }

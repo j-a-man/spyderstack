@@ -112,7 +112,7 @@ function FinalCTA() {
           </p>
           
           <button className="group relative inline-flex items-center justify-center px-16 py-8 bg-white text-primary font-bold text-2xl uppercase tracking-widest overflow-hidden transition-transform hover:scale-105 shadow-2xl">
-            <span className="relative z-10">Start Free Trial</span>
+            <span className="relative z-10">CONTACT US</span>
             <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
           </button>
        </div>

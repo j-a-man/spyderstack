@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Check, ArrowRight, Calendar } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false)
@@ -183,7 +184,7 @@ export default function PricingPage() {
               {/* Price Calculation - Adjusted font size for better fit */}
               <div className="mb-10 flex items-baseline gap-1">
                 <span className="text-5xl md:text-6xl font-display font-bold text-foreground tracking-tighter transition-all duration-300">
-                  ${isAnnual ? Math.round(297 * 12 * 0.8).toLocaleString() : 297}
+                  ${isAnnual ? Math.round(297 * 9.764).toLocaleString() : 297}
                 </span>
                 <span className="text-muted-foreground font-medium">
                   /{isAnnual ? "yr" : "mo"}
@@ -207,10 +208,11 @@ export default function PricingPage() {
                   </div>
                 ))}
               </div>
-
-              <Button className="w-full h-14 text-base rounded-none bg-foreground text-background hover:bg-primary hover:text-white uppercase tracking-widest font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-lg border border-transparent hover:border-primary/50">
-                Start Now <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              <Link href="/schedule">
+                <Button className="w-full h-14 text-base rounded-none bg-foreground text-background hover:bg-primary hover:text-white uppercase tracking-widest font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-lg border border-transparent hover:border-primary/50">
+                  Start Now <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
             </div>
 
             {/* CARD 2: CONTRACTOR SUPREME */}
@@ -251,10 +253,11 @@ export default function PricingPage() {
                   </div>
                 ))}
               </div>
-
-              <Button className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.6)]">
-                Start Now <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              <Link href="/schedule">
+                <Button className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.6)]">
+                  Schedule a Call <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
             </div>
 
           </div>
@@ -271,12 +274,14 @@ export default function PricingPage() {
             Let's analyze your current lead flow and determine the right infrastructure for your goals.
           </p>
 
-          <Button
-            variant="outline"
-            className="h-16 px-10 text-lg rounded-none border-foreground/20 text-foreground bg-transparent hover:bg-primary hover:text-white hover:border-primary uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_-5px_var(--primary)]"
-          >
-            <Calendar className="mr-2 w-5 h-5" /> Schedule a Time to Talk
-          </Button>
+          <Link href="/schedule">
+            <Button
+              variant="outline"
+              className="h-16 px-10 text-lg rounded-none border-foreground/20 text-foreground bg-transparent hover:bg-primary hover:text-white hover:border-primary uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_-5px_var(--primary)]"
+            >
+              <Calendar className="mr-2 w-5 h-5" /> Schedule a Time to Talk
+            </Button>
+          </Link>
         </div>
       </section>
 

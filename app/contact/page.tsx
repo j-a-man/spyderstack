@@ -33,7 +33,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="relative min-h-screen bg-black selection:bg-primary selection:text-white">
+    <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <NetworkBackground />
@@ -50,14 +50,14 @@ export default function ContactPage() {
         </div>
 
         <div className="container mx-auto max-w-7xl text-center relative z-10 px-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-bold tracking-widest uppercase text-white/80">
+            <span className="text-sm font-bold tracking-widest uppercase text-foreground/80">
               Communications Open
             </span>
           </div>
 
-          <h1 className="font-display text-7xl md:text-9xl font-bold text-white mb-8 tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+          <h1 className="font-display text-7xl md:text-9xl font-bold text-foreground mb-8 tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
             INITIATE <br /> <span className="text-primary">CONTACT</span>.
           </h1>
 
@@ -68,7 +68,7 @@ export default function ContactPage() {
       </section>
 
       {/* 2. CONTENT LAYER (Slides Over Hero - Z-10) */}
-      <div className="relative z-10 bg-background border-t border-white/10 shadow-[0_-50px_100px_-20px_rgba(0,0,0,0.5)]">
+      <div className="relative z-10 bg-background border-t border-foreground/10 shadow-[0_-50px_100px_-20px_rgba(0,0,0,0.5)]">
 
         {/* Scroll Buffer to allow Hero visibility */}
         <div className="h-[10vh] w-full pointer-events-none" />
@@ -78,10 +78,10 @@ export default function ContactPage() {
 
             {/* LEFT: Contact Form (Technical Panel) */}
             <div className="lg:col-span-7">
-              <div className="bg-white/5 border border-white/10 p-8 md:p-12 relative overflow-hidden group transition-all hover:border-primary/30 backdrop-blur-sm">
+              <div className="bg-foreground/5 border border-foreground/10 p-8 md:p-12 relative overflow-hidden group transition-all hover:border-primary/30 backdrop-blur-sm">
                 <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
 
-                <h2 className="font-display text-3xl font-bold text-white mb-8 tracking-wide flex items-center gap-3">
+                <h2 className="font-display text-3xl font-bold text-foreground mb-8 tracking-wide flex items-center gap-3">
                   <span className="text-primary text-lg">01.</span> TRANSMISSION FORM
                 </h2>
 
@@ -96,7 +96,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="John Smith"
-                        className="bg-black/40 border-white/10 h-14 focus:border-primary rounded-none text-white placeholder:text-white/20 transition-all duration-300 focus:bg-white/5"
+                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-white placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
                       />
                     </div>
                     <div className="space-y-2 group/input">
@@ -109,7 +109,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="john@example.com"
-                        className="bg-black/40 border-white/10 h-14 focus:border-primary rounded-none text-white placeholder:text-white/20 transition-all duration-300 focus:bg-white/5"
+                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-white placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
                       />
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export default function ContactPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="(555) 123-4567"
-                        className="bg-black/40 border-white/10 h-14 focus:border-primary rounded-none text-white placeholder:text-white/20 transition-all duration-300 focus:bg-white/5"
+                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-white placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
                       />
                     </div>
                     <div className="space-y-2 group/input">
@@ -135,7 +135,7 @@ export default function ContactPage() {
                         value={formData.company}
                         onChange={handleChange}
                         placeholder="Your Company Name"
-                        className="bg-black/40 border-white/10 h-14 focus:border-primary rounded-none text-white placeholder:text-white/20 transition-all duration-300 focus:bg-white/5"
+                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-white placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
                       />
                     </div>
                   </div>
@@ -147,15 +147,15 @@ export default function ContactPage() {
                       name="industry"
                       value={formData.industry}
                       onChange={handleChange}
-                      className="w-full px-3 h-14 bg-black/40 border border-white/10 text-white focus:border-primary focus:outline-none rounded-none appearance-none transition-all duration-300 focus:bg-white/5"
+                      className="w-full px-3 h-14 bg-background/40 border border-foreground/10 text-white focus:border-primary focus:outline-none rounded-none appearance-none transition-all duration-300 focus:bg-foreground/5"
                     >
-                      <option value="" className="bg-black text-muted-foreground">Select an industry</option>
-                      <option value="hvac" className="bg-black">HVAC</option>
-                      <option value="roofing" className="bg-black">Roofing</option>
-                      <option value="plumbing" className="bg-black">Plumbing</option>
-                      <option value="landscaping" className="bg-black">Landscaping</option>
-                      <option value="electrical" className="bg-black">Electrical</option>
-                      <option value="other" className="bg-black">Other</option>
+                      <option value="" className="bg-background text-muted-foreground">Select an industry</option>
+                      <option value="hvac" className="bg-background">HVAC</option>
+                      <option value="roofing" className="bg-background">Roofing</option>
+                      <option value="plumbing" className="bg-background">Plumbing</option>
+                      <option value="landscaping" className="bg-background">Landscaping</option>
+                      <option value="electrical" className="bg-background">Electrical</option>
+                      <option value="other" className="bg-background">Other</option>
                     </select>
                   </div>
 
@@ -169,7 +169,7 @@ export default function ContactPage() {
                       required
                       placeholder="Tell us about your business infrastructure..."
                       rows={5}
-                      className="bg-black/40 border-white/10 focus:border-primary rounded-none resize-none text-white placeholder:text-white/20 transition-all duration-300 focus:bg-white/5 p-4"
+                      className="bg-background/40 border-foreground/10 focus:border-primary rounded-none resize-none text-white placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5 p-4"
                     />
                   </div>
 
@@ -185,12 +185,12 @@ export default function ContactPage() {
 
               {/* Direct Line */}
               <div>
-                <h3 className="font-display text-2xl font-bold text-white mb-8 border-b border-white/10 pb-4 tracking-wide flex items-center gap-3">
+                <h3 className="font-display text-2xl font-bold text-foreground mb-8 border-b border-foreground/10 pb-4 tracking-wide flex items-center gap-3">
                   <span className="text-primary text-lg">02.</span> DIRECT LINE
                 </h3>
                 <div className="space-y-8">
                   <div className="flex items-start gap-6 group cursor-default">
-                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-foreground/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
                       <Mail className="w-6 h-6 text-primary" />
                     </div>
                     <div>
@@ -203,7 +203,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-6 group cursor-default">
-                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-foreground/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
                       <Phone className="w-6 h-6 text-primary" />
                     </div>
                     <div>
@@ -216,7 +216,7 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-start gap-6 group cursor-default">
-                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
+                    <div className="w-14 h-14 bg-white/5 flex items-center justify-center border border-foreground/10 group-hover:border-primary/50 group-hover:bg-primary/10 transition-all duration-300">
                       <MapPin className="w-6 h-6 text-primary" />
                     </div>
                     <div>
@@ -231,21 +231,21 @@ export default function ContactPage() {
               </div>
 
               {/* FAQ Panel */}
-              <div className="bg-white/5 border border-white/10 p-8 hover:border-primary/30 transition-colors duration-500">
-                <h3 className="font-display text-xl font-bold text-white mb-6 tracking-wide flex items-center gap-2">
+              <div className="bg-foreground/5 border border-foreground/10 p-8 hover:border-primary/30 transition-colors duration-500">
+                <h3 className="font-display text-xl font-bold text-foreground mb-6 tracking-wide flex items-center gap-2">
                   <span className="text-primary text-sm">03.</span> SYSTEM FAQ
                 </h3>
                 <div className="space-y-6">
                   <div className="group">
-                    <div className="text-sm font-bold text-white mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">How fast is deployment?</div>
-                    <div className="text-muted-foreground text-sm leading-relaxed border-l-2 border-white/10 pl-4 group-hover:border-primary transition-colors">
+                    <div className="text-sm font-bold text-foreground mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">How fast is deployment?</div>
+                    <div className="text-muted-foreground text-sm leading-relaxed border-l-2 border-foreground/10 pl-4 group-hover:border-primary transition-colors">
                       Most contractors are fully integrated and capturing leads in under 15 minutes.
                     </div>
                   </div>
                   <div className="w-full h-px bg-white/10" />
                   <div className="group">
-                    <div className="text-sm font-bold text-white mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">Is it complex to operate?</div>
-                    <div className="text-muted-foreground text-sm leading-relaxed border-l-2 border-white/10 pl-4 group-hover:border-primary transition-colors">
+                    <div className="text-sm font-bold text-foreground mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">Is it complex to operate?</div>
+                    <div className="text-muted-foreground text-sm leading-relaxed border-l-2 border-foreground/10 pl-4 group-hover:border-primary transition-colors">
                       Zero technical skill required. The infrastructure runs autonomously in the background.
                     </div>
                   </div>

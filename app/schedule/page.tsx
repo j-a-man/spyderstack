@@ -97,7 +97,7 @@ export default function SchedulePage() {
     }
 
     return (
-        <main className="relative min-h-screen bg-black selection:bg-primary selection:text-white">
+        <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
             <div className="fixed inset-0 z-0 pointer-events-none">
                 <NetworkBackground />
             </div>
@@ -109,13 +109,13 @@ export default function SchedulePage() {
 
                     {/* Header Text */}
                     <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 animate-in fade-in zoom-in duration-700">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-md mb-6 animate-in fade-in zoom-in duration-700">
                             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                            <span className="text-sm font-bold tracking-widest uppercase text-white/80">
+                            <span className="text-sm font-bold tracking-widest uppercase text-foreground/80">
                                 System Calibration
                             </span>
                         </div>
-                        <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter">
+                        <h1 className="font-display text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tighter">
                             SECURE YOUR <span className="text-primary">SLOT</span>.
                         </h1>
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -124,16 +124,16 @@ export default function SchedulePage() {
                     </div>
 
                     {/* Main Card Panel */}
-                    <div className="bg-background border border-white/10 shadow-2xl relative overflow-hidden min-h-[600px] flex flex-col md:flex-row">
+                    <div className="bg-background border border-foreground/10 shadow-2xl relative overflow-hidden min-h-[600px] flex flex-col md:flex-row">
                         {/* Top Progress Bar (Mobile) */}
                         <div className="absolute top-0 left-0 right-0 h-1 bg-white/5 md:hidden">
                             <div className="h-full bg-primary transition-all duration-500" style={{ width: `${(step / 3) * 100}%` }} />
                         </div>
 
                         {/* LEFT SIDE: Summary */}
-                        <div className="md:w-1/3 bg-white/5 border-r border-white/10 p-8 md:p-12 flex flex-col justify-between">
+                        <div className="md:w-1/3 bg-white/5 border-r border-foreground/10 p-8 md:p-12 flex flex-col justify-between">
                             <div>
-                                <h3 className="font-display text-2xl font-bold text-white mb-2">DEPLOYMENT BRIEF</h3>
+                                <h3 className="font-display text-2xl font-bold text-foreground mb-2">DEPLOYMENT BRIEF</h3>
                                 <p className="text-muted-foreground text-sm mb-8">30 Minute Strategy Session</p>
 
                                 <div className="space-y-6">
@@ -177,7 +177,7 @@ export default function SchedulePage() {
                             {/* STEP 1: SELECTION */}
                             {step === 1 && (
                                 <div className="animate-in fade-in slide-in-from-right-8 duration-500">
-                                    <h3 className="font-display text-2xl font-bold text-white mb-6">SELECT DATE & TIME</h3>
+                                    <h3 className="font-display text-2xl font-bold text-foreground mb-6">SELECT DATE & TIME</h3>
 
                                     {/* Date Grid */}
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -189,7 +189,7 @@ export default function SchedulePage() {
                                                     "p-4 border text-center transition-all duration-300 hover:scale-105",
                                                     selectedDate?.toDateString() === date.toDateString()
                                                         ? "bg-primary border-primary text-white shadow-[0_0_20px_-5px_var(--primary)]"
-                                                        : "bg-white/5 border-white/10 text-muted-foreground hover:border-primary/50 hover:text-white"
+                                                        : "bg-white/5 border-foreground/10 text-muted-foreground hover:border-primary/50 hover:text-foreground"
                                                 )}
                                             >
                                                 <div className="text-xs uppercase tracking-widest mb-1 opacity-70">
@@ -216,9 +216,9 @@ export default function SchedulePage() {
                                                         className={cn(
                                                             "py-2 px-1 text-sm border transition-all duration-200 relative overflow-hidden",
                                                             selectedTime === time
-                                                                ? "bg-white text-black border-white font-bold"
-                                                                : "bg-transparent border-white/10 text-muted-foreground hover:border-white/30 hover:text-white",
-                                                            (!selectedDate || full) && "opacity-30 cursor-not-allowed border-transparent bg-white/5"
+                                                                ? "bg-foreground text-background border-foreground font-bold"
+                                                                : "bg-transparent border-foreground/10 text-muted-foreground hover:border-foreground/30 hover:text-foreground",
+                                                            (!selectedDate || full) && "opacity-30 cursor-not-allowed border-transparent bg-foreground/5"
                                                         )}
                                                     >
                                                         {time}
@@ -244,14 +244,14 @@ export default function SchedulePage() {
                             {/* STEP 2: DETAILS */}
                             {step === 2 && (
                                 <div className="animate-in fade-in slide-in-from-right-8 duration-500">
-                                    <h3 className="font-display text-2xl font-bold text-white mb-6">CONTACT DETAILS</h3>
+                                    <h3 className="font-display text-2xl font-bold text-foreground mb-6">CONTACT DETAILS</h3>
 
                                     <form onSubmit={handleBooking} className="space-y-6">
                                         <div className="space-y-2">
                                             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Full Name</Label>
                                             <Input
                                                 required
-                                                className="bg-white/5 border-white/10 h-12 focus:border-primary rounded-none text-white"
+                                                className="bg-white/5 border-foreground/10 h-12 focus:border-primary rounded-none text-foreground"
                                                 placeholder="Enter your name"
                                                 value={formData.name}
                                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -262,7 +262,7 @@ export default function SchedulePage() {
                                             <Input
                                                 required
                                                 type="email"
-                                                className="bg-white/5 border-white/10 h-12 focus:border-primary rounded-none text-white"
+                                                className="bg-white/5 border-foreground/10 h-12 focus:border-primary rounded-none text-foreground"
                                                 placeholder="name@company.com"
                                                 value={formData.email}
                                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -272,7 +272,7 @@ export default function SchedulePage() {
                                             <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Company Name</Label>
                                             <Input
                                                 required
-                                                className="bg-white/5 border-white/10 h-12 focus:border-primary rounded-none text-white"
+                                                className="bg-white/5 border-foreground/10 h-12 focus:border-primary rounded-none text-foreground"
                                                 placeholder="Your Company Ltd."
                                                 value={formData.company}
                                                 onChange={(e) => setFormData({ ...formData, company: e.target.value })}
@@ -284,7 +284,7 @@ export default function SchedulePage() {
                                                 type="button"
                                                 variant="outline"
                                                 onClick={() => setStep(1)}
-                                                className="h-12 px-8 rounded-none border-white/10 text-white hover:bg-white/5 uppercase tracking-widest font-bold"
+                                                className="h-12 px-8 rounded-none border-foreground/10 text-white hover:bg-foreground/5 uppercase tracking-widest font-bold"
                                             >
                                                 Back
                                             </Button>
@@ -306,7 +306,7 @@ export default function SchedulePage() {
                                     <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6 border border-green-500/50">
                                         <CheckCircle2 className="w-10 h-10 text-green-500" />
                                     </div>
-                                    <h3 className="font-display text-3xl font-bold text-white mb-2">SYSTEM LOCKED</h3>
+                                    <h3 className="font-display text-3xl font-bold text-foreground mb-2">SYSTEM LOCKED</h3>
                                     <p className="text-muted-foreground mb-8 max-w-md">
                                         Your slot has been confirmed. A confirmation signal (email) has been sent to <strong>{formData.email}</strong> with your briefing video.
                                     </p>

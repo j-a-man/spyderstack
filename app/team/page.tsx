@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { Linkedin, Twitter, Mail, ArrowRight } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link" // <--- Added Link import
 
 const founders = [
   {
@@ -15,7 +16,7 @@ const founders = [
     image: "/placeholder-user.jpg" // Using your existing placeholder
   },
   {
-    name: "Matthew Condon",
+    name: "Matthew Smolen",
     role: "Co-Founder",
     bio: "Architecting the client experience and ensuring every system deployment creates tangible revenue impact.",
     image: "/placeholder-user.jpg"
@@ -128,9 +129,14 @@ function JoinCTA() {
         <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
           We are always looking for talented engineers and problem solvers to join the infrastructure.
         </p>
-        <Button variant="outline" className="h-14 px-10 text-lg rounded-none border-foreground/20 hover:bg-foreground hover:text-background uppercase tracking-widest font-bold transition-all">
-          View Open Positions <ArrowRight className="ml-2 w-5 h-5" />
-        </Button>
+
+        {/* CHANGED: Linked to /careers */}
+        <Link href="/careers">
+          <Button variant="outline" className="h-14 px-10 text-lg rounded-none border-foreground/20 hover:bg-foreground hover:text-background uppercase tracking-widest font-bold transition-all">
+            View Open Positions <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </Link>
+
       </div>
     </section>
   )

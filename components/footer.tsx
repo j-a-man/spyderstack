@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
+import { Twitter, Linkedin, Instagram } from "lucide-react"
 import Image from "next/image"
 
 const footerLinks = {
@@ -9,7 +9,7 @@ const footerLinks = {
     { label: "About Us", href: "/about" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Our Team", href: "/team" },
-    { label: "Careers", href: "/careers" },
+    { label: "Careers", href: "/careers" }, // <--- Linked to /careers
   ],
   industries: [
     { label: "HVAC", href: "/industries/hvac" },
@@ -26,14 +26,13 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    // CHANGED: Added 'relative z-30' to sit ABOVE the z-20 CTA section
-    // CHANGED: Added 'bg-background' to ensure opacity
-    <footer className="relative z-30 bg-background border-t border-border overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+    // Z-40 to slide over other sticky sections
+    <footer className="relative z-40 bg-background border-t border-white/10 overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
 
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
         }}
       />
@@ -48,7 +47,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3 group mb-6">
               <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
                 <Image
-                  src="/spider.png" // <--- CHANGE THIS to your logo file path (e.g. "/my-logo.png")
+                  src="/spider.png" // <--- Updated to use your spider logo
                   alt="SpyderStack Logo"
                   fill
                   className="object-contain"
@@ -63,7 +62,7 @@ export function Footer() {
             </p>
 
             {/* System Status Indicator */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-border bg-card backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -103,7 +102,7 @@ export function Footer() {
             <h4 className="text-foreground font-display font-bold uppercase tracking-widest mb-6">Connect</h4>
             <div className="flex gap-4">
               {[Twitter, Linkedin, Instagram].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-foreground/10 transition-all">
+                <a key={i} href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -112,9 +111,9 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-xs text-muted-foreground uppercase tracking-widest">
-            © {new Date().getFullYear()} SpyderStack Inc. All Rights Reserved.
+            © {new Date().getFullYear()} SpyderStack LLC. All Rights Reserved.
           </div>
 
           <div className="flex gap-8">

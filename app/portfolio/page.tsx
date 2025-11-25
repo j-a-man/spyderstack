@@ -79,7 +79,7 @@ function PortfolioHero() {
 
         <div className="mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
           <span className="inline-block text-primary tracking-[0.2em] text-xs font-bold uppercase border border-primary/30 px-6 py-2 rounded-full bg-primary/5 backdrop-blur-md">
-            Case Studies
+            Portfolio
           </span>
         </div>
 

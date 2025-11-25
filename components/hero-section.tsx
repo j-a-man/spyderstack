@@ -124,7 +124,7 @@ export function HeroSection() {
 
           <h1 className="font-display text-7xl md:text-9xl font-bold leading-[0.85] tracking-tighter mb-6 text-foreground">
             BUILDING <br />
-            <span className="text-outline">DIGITAL</span> <br />
+            <span className="text-outline font-bold">DIGITAL</span> <br />
             WEBS.
           </h1>
 
@@ -149,7 +149,9 @@ export function HeroSection() {
         {/* Right Side: Metallic Spider Logo */}
         <div className="hidden lg:flex items-center justify-center pb-12 relative">
           <div className="absolute w-96 h-96 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
-          <div className="relative w-[700px] h-[700px] animate-in fade-in zoom-in duration-1000 delay-300">
+
+          {/* CHANGED: Replaced 'zoom-in' with 'slide-in-from-bottom-4' for a subtle float-up effect */}
+          <div className="relative w-[700px] h-[700px] animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
             <Image
               src="/spider.png"
               alt="Metallic Spider Logo"

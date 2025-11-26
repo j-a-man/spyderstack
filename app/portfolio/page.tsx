@@ -2,6 +2,7 @@
 
 import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
+import { ParticleAnimation } from "@/components/particle-animation"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -70,13 +71,8 @@ const caseStudies = [
 // 1. HERO SECTION (Manifesto Style)
 function PortfolioHero() {
   return (
-    <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background">
-
-      {/* Technical Grid Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
-      </div>
+    <section className="sticky top-0 z-0 min-h-screen flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background">
+      <ParticleAnimation />
 
       <div className="container mx-auto max-w-5xl relative z-10 px-6 text-center">
 
@@ -210,7 +206,10 @@ export default function PortfolioPage() {
       </div>
 
       {/* Content Layer (Z-20) - Slides over hero if sticky, or flows naturally */}
-      <div className="relative z-20 bg-background">
+      <div className="relative z-20 bg-background border-t border-foreground/10 shadow-[0_-50px_100px_-20px_rgba(0,0,0,0.5)]">
+        {/* Scroll Buffer to allow Hero visibility */}
+        <div className="h-[10vh] w-full pointer-events-none" />
+
         <CaseStudyGrid />
         <PortfolioCTA />
       </div>

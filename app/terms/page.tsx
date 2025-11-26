@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer"
 
 export default function TermsPage() {
     return (
-        <main className="relative min-h-screen bg-background selection:bg-primary selection:text-white">
+        <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
             {/* Fixed Background */}
             <div className="fixed inset-0 z-0 pointer-events-none">
                 <NetworkBackground />
@@ -18,7 +18,7 @@ export default function TermsPage() {
             <section className="relative z-10 pt-40 pb-20 px-6 border-b border-foreground/5 overflow-hidden">
                 <div className="absolute inset-0 z-0 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+                    <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
                 </div>
 
                 <div className="container mx-auto max-w-4xl text-center relative z-10">

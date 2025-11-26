@@ -34,11 +34,11 @@ const positions = [
 // 1. HERO SECTION
 function CareersHero() {
     return (
-        <section className="relative z-10 pt-40 pb-20 px-6 border-b border-white/5 overflow-hidden bg-background">
+        <section className="relative z-10 pt-40 pb-20 px-6 border-b border-foreground/5 overflow-hidden bg-background">
             {/* Technical Grid Background */}
             <div className="absolute inset-0 z-0 pointer-events-none">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_40%)] opacity-10" />
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
             </div>
 
             <div className="container mx-auto max-w-7xl text-center relative z-10">
@@ -85,14 +85,14 @@ function OpenPositions() {
 
                             {/* Icon */}
                             <div className="relative z-10 w-16 h-16 bg-black/40 border border-foreground/10 flex items-center justify-center group-hover:border-primary/50 transition-colors">
-                                <job.icon className="w-8 h-8 text-white group-hover:text-primary transition-colors" />
+                                <job.icon className="w-8 h-8 text-foreground group-hover:text-primary transition-colors" />
                             </div>
 
                             {/* Info */}
                             <div className="relative z-10 flex-1">
                                 <div className="flex flex-wrap items-center gap-4 mb-2">
                                     <h3 className="font-display text-3xl font-bold text-foreground">{job.title}</h3>
-                                    <span className="px-3 py-1 rounded-full border border-foreground/10 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-primary">
+                                    <span className="px-3 py-1 rounded-full border border-foreground/10 bg-foreground/5 text-[10px] font-bold uppercase tracking-widest text-primary">
                                         {job.type}
                                     </span>
                                 </div>
@@ -105,7 +105,7 @@ function OpenPositions() {
                             {/* Action */}
                             <div className="relative z-10 mt-4 md:mt-0">
                                 <Link href="/contact">
-                                    <Button variant="outline" className="h-12 px-8 rounded-none border-foreground/20 text-white hover:bg-primary hover:text-white hover:border-primary uppercase tracking-widest font-bold transition-all group-hover:shadow-[0_0_20px_-5px_var(--primary)]">
+                                    <Button variant="outline" className="h-12 px-8 rounded-none border-border text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary uppercase tracking-widest font-bold transition-all group-hover:shadow-[0_0_20px_-5px_var(--primary)]">
                                         Apply Now <ArrowRight className="ml-2 w-4 h-4" />
                                     </Button>
                                 </Link>

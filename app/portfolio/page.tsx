@@ -4,6 +4,9 @@ import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
 import { Footer } from "@/components/footer"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 const caseStudies = [
   {
@@ -70,9 +73,9 @@ function PortfolioHero() {
     <section className="relative min-h-[60vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background">
 
       {/* Technical Grid Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
       <div className="container mx-auto max-w-5xl relative z-10 px-6 text-center">
@@ -173,15 +176,19 @@ function PortfolioCTA() {
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[size:20px_20px]" />
 
       <div className="container mx-auto max-w-4xl px-6 relative z-10">
-        <h2 className="font-display text-5xl md:text-7xl font-bold mb-8 text-white tracking-tight">
+        <h2 className="font-display text-5xl md:text-7xl font-bold mb-8 text-primary-foreground tracking-tight">
           READY TO BE OUR NEXT <br /> SUCCESS STORY?
         </h2>
-        <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-primary-foreground/90 mb-12 max-w-2xl mx-auto leading-relaxed">
           Join hundreds of contractors who are capturing more leads with SpyderStack.
         </p>
-        <button className="bg-white text-primary font-bold text-lg px-12 py-5 uppercase tracking-widest hover:bg-white/90 transition-colors shadow-2xl">
-          Start Your Free Trial
-        </button>
+
+        {/* CHANGED: Updated Button */}
+        <Link href="/schedule">
+          <Button className="h-14 px-8 text-base rounded-none bg-background text-foreground hover:bg-background/90 uppercase tracking-widest font-bold shadow-lg hover:shadow-foreground/25 transition-all duration-300 hover:scale-105 active:scale-95">
+            Start Now <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+        </Link>
       </div>
     </section>
   )

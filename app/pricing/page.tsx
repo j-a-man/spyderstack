@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import { useTheme } from "next-themes"
 import { Header } from "@/components/header"
 import { NetworkBackground } from "@/components/network-background"
 import { Footer } from "@/components/footer"
@@ -11,9 +12,15 @@ import Link from "next/link"
 
 export default function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(false)
+  const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   // --- IMPROVED CANVAS ANIMATION LOGIC (Matches Home Page) ---
   const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -25,6 +32,9 @@ export default function PricingPage() {
     let width = 0
     let height = 0
     let particles: any[] = []
+
+    const isDark = theme === 'dark' || !mounted
+    const color = isDark ? '255, 255, 255' : '0, 0, 0'
 
     const resize = () => {
       width = canvas.width = canvas.offsetWidth
@@ -64,7 +74,7 @@ export default function PricingPage() {
         const pulse = Math.sin(Date.now() * 0.002 + p1.phase)
         const alpha = 0.4 + (pulse + 1) * 0.3
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
+        ctx.fillStyle = `rgba(${color}, ${alpha})`
         ctx.beginPath()
         ctx.arc(p1.x, p1.y, p1.size, 0, Math.PI * 2)
         ctx.fill()
@@ -79,7 +89,7 @@ export default function PricingPage() {
           if (dist < 220) {
             ctx.beginPath()
             // Thicker, brighter lines
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 * (1 - dist / 220)})`
+            ctx.strokeStyle = `rgba(${color}, ${0.3 * (1 - dist / 220)})`
             ctx.lineWidth = 0.8
             ctx.moveTo(p1.x, p1.y)
             ctx.lineTo(p2.x, p2.y)
@@ -98,11 +108,11 @@ export default function PricingPage() {
       window.removeEventListener("resize", resize)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [])
+  }, [theme, mounted])
   // --- END ANIMATION LOGIC ---
 
   return (
-    <main className="relative min-h-screen bg-background selection:bg-primary selection:text-white">
+    <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
       {/* Fixed Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <NetworkBackground />
@@ -202,14 +212,14 @@ export default function PricingPage() {
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4 group/item">
                     <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover/item:bg-primary/40">
-                      <Check className="w-3 h-3 text-primary group-hover/item:text-white transition-colors" />
+                      <Check className="w-3 h-3 text-primary group-hover/item:text-primary-foreground transition-colors" />
                     </div>
                     <span className="text-foreground/90 text-sm font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
               <Link href="/schedule">
-                <Button className="w-full h-14 text-base rounded-none bg-foreground text-background hover:bg-primary hover:text-white uppercase tracking-widest font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-lg border border-transparent hover:border-primary/50">
+                <Button className="w-full h-14 text-base rounded-none bg-foreground text-background hover:bg-primary hover:text-primary-foreground uppercase tracking-widest font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-lg border border-transparent hover:border-primary/50">
                   Start Now <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -247,14 +257,14 @@ export default function PricingPage() {
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4 group/item">
                     <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover/item:bg-primary/40">
-                      <Check className="w-3 h-3 text-primary group-hover/item:text-white transition-colors" />
+                      <Check className="w-3 h-3 text-primary group-hover/item:text-primary-foreground transition-colors" />
                     </div>
                     <span className="text-foreground/90 text-sm font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
               <Link href="/schedule">
-                <Button className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.6)]">
+                <Button className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-primary-foreground uppercase tracking-widest font-bold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.6)]">
                   Schedule a Call <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
@@ -277,7 +287,7 @@ export default function PricingPage() {
           <Link href="/schedule">
             <Button
               variant="outline"
-              className="h-16 px-10 text-lg rounded-none border-foreground/20 text-foreground bg-transparent hover:bg-primary hover:text-white hover:border-primary uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_-5px_var(--primary)]"
+              className="h-16 px-10 text-lg rounded-none border-foreground/20 text-foreground bg-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_-5px_var(--primary)]"
             >
               <Calendar className="mr-2 w-5 h-5" /> Schedule a Time to Talk
             </Button>

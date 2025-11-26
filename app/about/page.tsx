@@ -12,7 +12,7 @@ function AboutHero() {
       {/* Background: Technical Grid & Radial Glow (Distinct from Home) */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_50%)] opacity-10" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
       <div className="container mx-auto max-w-5xl relative z-10 px-6 text-center">
@@ -98,8 +98,8 @@ function ValuesSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {values.map((value, i) => (
             <div key={i} className="group relative overflow-hidden bg-foreground/5 p-10 border border-foreground/10 hover:bg-primary transition-all duration-500 hover:scale-105 hover:shadow-2xl">
-              <h3 className="text-3xl font-display font-bold text-foreground mb-4 group-hover:text-white">{value.title}</h3>
-              <p className="text-muted-foreground leading-relaxed group-hover:text-white/90">
+              <h3 className="text-3xl font-display font-bold text-foreground mb-4 group-hover:text-primary-foreground">{value.title}</h3>
+              <p className="text-muted-foreground leading-relaxed group-hover:text-primary-foreground/90">
                 {value.desc}
               </p>
             </div>

@@ -93,28 +93,28 @@ function ProcessSteps() {
 function FinalCTA() {
   return (
     // CHANGED: Added ample padding (py-40) to decompress the section
-    <section className="relative z-30 py-40 flex flex-col justify-center items-center bg-primary text-primary-foreground border-t border-white/20 overflow-hidden">
+    <section className="relative z-30 py-40 flex flex-col justify-center items-center bg-primary text-primary-foreground border-t border-primary-foreground/20 overflow-hidden">
 
       {/* Decorative Background */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[size:20px_20px]" />
 
       <div className="container mx-auto max-w-6xl text-center px-6 relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md mb-12">
-          <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-md mb-12">
+          <span className="w-2 h-2 rounded-full bg-primary-foreground animate-pulse" />
           <span className="text-sm font-bold tracking-widest uppercase">System Ready</span>
         </div>
 
         <h2 className="font-display text-7xl md:text-[10rem] font-bold mb-12 tracking-tighter leading-[0.8]">
-          READY TO <br /> <span className="text-white/50">DEPLOY?</span>
+          READY TO <br /> <span className="text-primary-foreground/50">DEPLOY?</span>
         </h2>
 
-        <p className="text-2xl md:text-3xl text-white/90 mb-16 max-w-3xl mx-auto font-medium leading-relaxed">
+        <p className="text-2xl md:text-3xl text-primary-foreground/90 mb-16 max-w-3xl mx-auto font-medium leading-relaxed">
           Join the contractors who have automated their growth infrastructure.
         </p>
 
         <Link href="/schedule" className="group relative inline-flex items-center justify-center px-16 py-8 bg-background text-foreground font-bold text-2xl uppercase tracking-widest overflow-hidden transition-transform hover:scale-105 shadow-2xl">
           <span className="relative z-10">CONTACT US</span>
-          <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
+          <div className="absolute inset-0 bg-primary-foreground/0 group-hover:bg-primary-foreground/10 transition-colors" />
         </Link>
       </div>
     </section>

@@ -14,7 +14,7 @@ function LandscapingHero() {
       {/* Technical Grid Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_40%)] opacity-10" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
 
       <div className="container mx-auto max-w-7xl text-center relative z-10">
@@ -112,7 +112,7 @@ function LandscapingFeatures() {
 
               <div className="relative z-10">
                 <div className="w-12 h-12 bg-foreground/5 border border-foreground/10 flex items-center justify-center mb-8 group-hover:bg-primary/20 group-hover:border-primary/50 transition-colors">
-                  <feature.icon className="w-6 h-6 text-white group-hover:text-primary transition-colors" />
+                  <feature.icon className="w-6 h-6 text-foreground group-hover:text-primary transition-colors" />
                 </div>
 
                 <h3 className="font-display text-3xl font-bold text-foreground mb-4">{feature.title}</h3>
@@ -141,13 +141,13 @@ function LandscapingCTA() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <Link href="/schedule">
-            <Button className="h-14 px-8 text-base rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95">
+            <Button className="h-14 px-8 text-base rounded-none bg-primary hover:bg-primary/90 text-primary-foreground uppercase tracking-widest font-bold shadow-lg hover:shadow-primary/25 transition-all duration-300 hover:scale-105 active:scale-95">
               Start Now <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
 
           <Link href="/contact">
-            <Button variant="outline" className="h-14 px-8 text-base rounded-none border-white/20 text-white hover:bg-white hover:text-black uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95">
+            <Button variant="outline" className="h-14 px-8 text-base rounded-none border-border text-foreground hover:bg-foreground hover:text-background uppercase tracking-widest font-bold transition-all duration-300 hover:scale-105 active:scale-95">
               <Calendar className="mr-2 w-5 h-5" /> Contact Us
             </Button>
           </Link>

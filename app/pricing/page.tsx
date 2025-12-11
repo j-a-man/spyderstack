@@ -126,7 +126,7 @@ export default function PricingPage() {
         {/* Animated Web Background - Full Opacity */}
         <div className="absolute inset-0 z-0 opacity-100">
           <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
         </div>
 
         <div className="container mx-auto max-w-7xl text-center relative z-10">
@@ -180,35 +180,45 @@ export default function PricingPage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
-            {/* CARD 1: CONTRACTOR ADVANCED */}
+            {/* CARD 1: ADVANCED WEBSITE */}
             <div className="relative group bg-foreground/5 border border-foreground/10 p-10 hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_-10px_rgba(var(--primary-rgb),0.1)] flex flex-col">
               <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1 uppercase tracking-widest shadow-[0_0_20px_var(--primary)]">
-                Most Popular
+                Best Value
               </div>
 
               <div className="mb-8">
-                <h3 className="font-display text-3xl font-bold text-foreground mb-2">Contractor Advanced</h3>
-                <p className="text-muted-foreground text-sm">Perfect for establishing your digital dominance.</p>
+                <h3 className="font-display text-3xl font-bold text-foreground mb-2">Advanced Website</h3>
+                <p className="text-muted-foreground text-sm">Professional digital presence built to convert.</p>
               </div>
 
-              {/* Price Calculation - Adjusted font size for better fit */}
-              <div className="mb-10 flex items-baseline gap-1">
-                <span className="text-5xl md:text-6xl font-display font-bold text-foreground tracking-tighter transition-all duration-300">
-                  ${isAnnual ? Math.round(297 * 9.764).toLocaleString() : 297}
-                </span>
-                <span className="text-muted-foreground font-medium">
-                  /{isAnnual ? "yr" : "mo"}
-                </span>
+              {/* Price Calculation */}
+              <div className="mb-10">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl md:text-5xl font-display font-bold text-foreground tracking-tighter">
+                    $300
+                  </span>
+                  <span className="text-muted-foreground font-medium uppercase text-sm tracking-wide">
+                    Upfront
+                  </span>
+                </div>
+                <div className="flex items-baseline gap-1 mt-1">
+                  <span className="text-xl md:text-2xl font-display font-bold text-primary tracking-tighter">
+                    + $25
+                  </span>
+                  <span className="text-muted-foreground font-medium text-sm">
+                    /mo hosting
+                  </span>
+                </div>
               </div>
 
               <div className="space-y-6 mb-12 flex-1">
                 {[
-                  "Functional Website (10-20 Pages)",
-                  "Automated Lead Follow Up",
-                  "Missed Call Text Back",
-                  "5-Star Magic Review Funnel",
-                  "One-Click Marketing Campaigns",
-                  "On-Site SEO"
+                  "Multi-Page Custom Website",
+                  "High-Converting Call to Actions",
+                  "Auto Google Review Form",
+                  "AI Chatbot Integration",
+                  "Mobile Responsive Design",
+                  "Basic SEO Optimization"
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4 group/item">
                     <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover/item:bg-primary/40">
@@ -220,54 +230,62 @@ export default function PricingPage() {
               </div>
               <Link href="/schedule">
                 <Button className="w-full h-14 text-base rounded-none bg-foreground text-background hover:bg-primary hover:text-primary-foreground uppercase tracking-widest font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-lg border border-transparent hover:border-primary/50">
-                  Start Now <ArrowRight className="ml-2 w-4 h-4" />
+                  Get Started <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
             </div>
 
-            {/* CARD 2: CONTRACTOR SUPREME */}
-            <div className="relative group bg-foreground/5 border border-foreground/10 p-10 hover:border-primary transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_-10px_rgba(var(--primary-rgb),0.2)] flex flex-col">
+            {/* CARD 2: CONTRACTOR ADVANCED (Moved & Coming Soon) */}
+            <div className="relative group bg-foreground/5 border border-foreground/10 p-10 hover:border-primary transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_50px_-10px_rgba(var(--primary-rgb),0.2)] flex flex-col overflow-hidden">
 
-              <div className="mb-8">
-                <h3 className="font-display text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">Contractor Supreme</h3>
-                <p className="text-muted-foreground text-sm">Full-scale aggressive growth engine.</p>
-              </div>
-
-              <div className="mb-10 flex items-baseline gap-1">
-                <span className="text-5xl md:text-6xl font-display font-bold text-foreground tracking-tighter transition-all duration-300">
-                  ${isAnnual ? Math.round(750 * 12 * 0.8).toLocaleString() : 750}
-                </span>
-                <span className="text-muted-foreground font-medium">
-                  /{isAnnual ? "yr" : "mo"}
-                </span>
-              </div>
-
-              <div className="space-y-6 mb-12 flex-1">
-                <div className="flex items-start gap-4">
-                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 text-primary" />
-                  </div>
-                  <span className="text-foreground font-bold text-sm">Everything in Contractor Advanced +</span>
+              {/* COMING SOON OVERLAY */}
+              <div className="absolute inset-x-0 top-8 z-20 flex justify-center -rotate-3 pointer-events-none">
+                <div className="bg-primary text-primary-foreground text-xl font-bold px-12 py-2 uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(0,0,0,0.5)] border border-white/20">
+                  Coming Soon
                 </div>
-                {[
-                  "Google Ads Management",
-                  "Google My Business Optimizations",
-                  "Priority Support Access",
-                  "Monthly Strategy Calls"
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4 group/item">
-                    <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover/item:bg-primary/40">
-                      <Check className="w-3 h-3 text-primary group-hover/item:text-primary-foreground transition-colors" />
-                    </div>
-                    <span className="text-foreground/90 text-sm font-medium">{feature}</span>
-                  </div>
-                ))}
               </div>
-              <Link href="/schedule">
-                <Button className="w-full h-14 text-base rounded-none bg-primary hover:bg-primary/90 text-primary-foreground uppercase tracking-widest font-bold shadow-[0_0_20px_-5px_rgba(var(--primary-rgb),0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.6)]">
-                  Schedule a Call <ArrowRight className="ml-2 w-4 h-4" />
+
+              <div className="opacity-60 grayscale-[0.8] group-hover:grayscale-0 transition-all duration-500 pointer-events-none select-none">
+                <div className="mb-8">
+                  <h3 className="font-display text-3xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">Contractor Advanced</h3>
+                  <p className="text-muted-foreground text-sm">Full-scale marketing automation suite.</p>
+                </div>
+
+                <div className="mb-10 flex items-baseline gap-1">
+                  <span className="text-5xl md:text-6xl font-display font-bold text-foreground tracking-tighter transition-all duration-300">
+                    ${isAnnual ? Math.round(297 * 9.764).toLocaleString() : 297}
+                  </span>
+                  <span className="text-muted-foreground font-medium">
+                    /{isAnnual ? "yr" : "mo"}
+                  </span>
+                </div>
+
+                <div className="space-y-6 mb-12 flex-1">
+                  <div className="flex items-start gap-4">
+                    <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-primary" />
+                    </div>
+                    <span className="text-foreground font-bold text-sm">Everything in Advanced Website +</span>
+                  </div>
+                  {[
+                    "Automated Lead Follow Up",
+                    "Missed Call Text Back",
+                    "5-Star Magic Review Funnel",
+                    "One-Click Marketing Campaigns",
+                    "On-Site SEO"
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-start gap-4 group/item">
+                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover/item:bg-primary/40">
+                        <Check className="w-3 h-3 text-primary group-hover/item:text-primary-foreground transition-colors" />
+                      </div>
+                      <span className="text-foreground/90 text-sm font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <Button disabled className="w-full h-14 text-base rounded-none bg-muted text-muted-foreground uppercase tracking-widest font-bold cursor-not-allowed border border-border">
+                  Join Waitlist <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
-              </Link>
+              </div>
             </div>
 
           </div>

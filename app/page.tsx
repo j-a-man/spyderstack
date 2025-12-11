@@ -59,7 +59,7 @@ function ProcessSteps() {
               className="group relative overflow-hidden bg-card p-10 border border-border hover:border-primary/50 transition-all duration-500"
             >
               {/* Hover Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-6">
@@ -96,7 +96,7 @@ function FinalCTA() {
     <section className="relative z-30 py-40 flex flex-col justify-center items-center bg-primary text-primary-foreground border-t border-primary-foreground/20 overflow-hidden">
 
       {/* Decorative Background */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[size:20px_20px]" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,#fff_1px,transparent_1px)] bg-size-[20px_20px]" />
 
       <div className="container mx-auto max-w-6xl text-center px-6 relative z-10">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-md mb-12">

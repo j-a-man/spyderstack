@@ -59,7 +59,7 @@ export function Header() {
       )}>
 
         {/* LEFT: Company Name & Logo */}
-        <Link href="/" className="flex items-center gap-3 group relative z-[60]">
+        <Link href="/" className="flex items-center gap-3 group relative z-60">
           <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
             <Image
               src="/spider.png"
@@ -74,7 +74,7 @@ export function Header() {
         </Link>
 
         {/* RIGHT: Nav Links + Menu Button */}
-        <div className="flex items-center gap-4 relative z-[60]">
+        <div className="flex items-center gap-4 relative z-60">
 
           {/* Desktop Links (Hidden on Mobile) */}
           <nav className="hidden md:flex items-center gap-8 mr-4">
@@ -118,8 +118,8 @@ export function Header() {
             // - max-w-[420px]: Limits width on desktop/tablet
             "absolute top-full mt-4 right-0",
             "w-[calc(100vw-3rem)] md:w-[420px]", // Responsive Width
-            "bg-primary text-white shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] origin-top-right z-[70]",
-            "rounded-[2rem] p-8 md:p-10", // Slightly smaller padding on mobile
+            "bg-primary text-white shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] origin-top-right z-70",
+            "rounded-4xl p-8 md:p-10", // Slightly smaller padding on mobile
 
             isOpen
               ? "opacity-100 scale-100 translate-y-0 visible"
@@ -127,8 +127,8 @@ export function Header() {
           )}
         >
           {/* Decorative Patterns */}
-          <div className="absolute inset-0 pointer-events-none opacity-10 bg-[radial-gradient(circle_at_top_right,_#fff_1px,_transparent_1px)] bg-[size:20px_20px]" />
-          <div className="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:40px_40px]" />
+          <div className="absolute inset-0 pointer-events-none opacity-10 bg-[radial-gradient(circle_at_top_right,#fff_1px,transparent_1px)] bg-size-[20px_20px]" />
+          <div className="absolute inset-0 pointer-events-none opacity-5 bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-size-[40px_40px]" />
 
           {/* Menu List */}
           <nav className="flex flex-col gap-1 relative z-10">

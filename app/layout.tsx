@@ -19,6 +19,9 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "SpyderStack - Infrastructure for Growth",
   description: "Premium automation platform for contractors.",
+  icons: {
+    icon: "/spider.png",
+  },
 }
 
 export default function RootLayout({

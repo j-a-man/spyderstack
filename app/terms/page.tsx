@@ -111,7 +111,7 @@ export default function TermsPage() {
                         ref={canvasRef}
                         className="absolute inset-0 w-full h-full"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-linear-to-t from-background via-transparent to-transparent" />
                 </div>
 
                 <div className="container mx-auto max-w-4xl text-center relative z-10">

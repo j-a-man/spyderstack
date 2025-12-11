@@ -11,60 +11,46 @@ import Link from "next/link"
 
 const caseStudies = [
   {
-    industry: "HVAC",
-    company: "Arctic Air Solutions",
-    location: "Phoenix, AZ",
+    industry: "Pharmacy",
+    company: "Health Guard Pharmacy",
+    location: "Queens, NY",
     results: {
-      missedCallsReduced: "94%",
-      responseTime: "< 30s",
-      revenueIncrease: "$47k/mo",
+      visits: "850+",
+      retention: "95%",
+      rating: "5.0/5",
     },
     quote:
-      "Before SpyderStack, we were losing 15-20 calls per week during busy season. Now we capture every single lead. It's like having a full-time receptionist who never takes a break.",
-    name: "Mike Rodriguez",
+      "SpyderStack built us a beautiful multipage website with a chatbot that our patients love. We are very happy with the modern design and functionality.",
+    name: "Linda Yee",
     role: "Owner",
   },
   {
-    industry: "Roofing",
-    company: "Summit Roofing Co.",
-    location: "Denver, CO",
+    industry: "Paving",
+    company: "Woolfolk Paving",
+    location: "Binghamton, NY",
     results: {
-      missedCallsReduced: "89%",
-      responseTime: "< 45s",
-      revenueIncrease: "$63k/mo",
+      visits: "420+",
+      retention: "88%",
+      rating: "5.0/5",
     },
     quote:
-      "Storm season is our busiest time. SpyderStack helped us handle 3x more leads without hiring additional staff. The ROI was obvious within the first month.",
-    name: "Sarah Chen",
-    role: "Operations Manager",
+      "Our old website was outdated. The new one is sleek, professional, and represents our work perfectly. It's the digital face our business needed.",
+    name: "Willie Woolfolk",
+    role: "Owner",
   },
   {
-    industry: "Plumbing",
-    company: "FlowPro Plumbing",
-    location: "Austin, TX",
+    industry: "Pharmacy",
+    company: "Atlantic Pharmacy",
+    location: "Brooklyn, NY",
     results: {
-      missedCallsReduced: "92%",
-      responseTime: "< 25s",
-      revenueIncrease: "$34k/mo",
+      visits: "680+",
+      retention: "92%",
+      rating: "5.0/5",
     },
     quote:
-      "Emergency calls come at all hours. SpyderStack responds instantly even when we're on another job. Our customers love the fast response, and we love the extra revenue.",
-    name: "James Turner",
-    role: "Founder",
-  },
-  {
-    industry: "Landscaping",
-    company: "GreenScape Designs",
-    location: "Portland, OR",
-    results: {
-      missedCallsReduced: "91%",
-      responseTime: "< 35s",
-      revenueIncrease: "$28k/mo",
-    },
-    quote:
-      "We're often working outdoors where it's loud and phone calls get missed. SpyderStack ensures every inquiry gets an immediate response. Our booking rate has doubled.",
-    name: "Amanda Foster",
-    role: "Co-Owner",
+      "We needed a website that instilled trust. SpyderStack delivered a clean, fast, and user-friendly site that has helped us retain so many more clients.",
+    name: "Frank Yip",
+    role: "Owner",
   },
 ]
 
@@ -84,11 +70,11 @@ function PortfolioHero() {
 
         <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.85] tracking-tighter mb-10 text-foreground animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
           REAL <span className="text-primary">RESULTS</span>.<br />
-          REAL REVENUE.
+          REAL IMPACT.
         </h1>
 
         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-          See how contractors across industries are using SpyderStack to capture more leads and scale their operations.
+          See how businesses across industries are using SpyderStack to elevate their digital presence and engage more customers.
         </p>
       </div>
     </section>
@@ -107,7 +93,7 @@ function CaseStudyGrid() {
               className="group relative bg-foreground/5 border border-foreground/10 overflow-hidden hover:border-primary/50 transition-all duration-500"
             >
               {/* Subtle Hover Glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-linear-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 md:p-12">
 
@@ -126,16 +112,16 @@ function CaseStudyGrid() {
                   {/* Metric Grid */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 lg:mt-0 py-8 border-t border-b border-foreground/10">
                     <div>
-                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.missedCallsReduced}</div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Calls Saved</div>
+                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.visits}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Site Visits</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.responseTime}</div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Response</div>
+                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.retention}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Client Retention</div>
                     </div>
                     <div>
-                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.revenueIncrease}</div>
-                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Revenue</div>
+                      <div className="text-3xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors font-display">{study.results.rating}</div>
+                      <div className="text-[10px] text-muted-foreground uppercase tracking-wider">Satisfaction</div>
                     </div>
                   </div>
                 </div>
@@ -169,7 +155,7 @@ function CaseStudyGrid() {
 function PortfolioCTA() {
   return (
     <section className="relative z-10 py-32 bg-primary border-t border-foreground/20 overflow-hidden text-center">
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_#fff_1px,_transparent_1px)] bg-[size:20px_20px]" />
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,#fff_1px,transparent_1px)] bg-size-[20px_20px]" />
 
       <div className="container mx-auto max-w-4xl px-6 relative z-10">
         <h2 className="font-display text-5xl md:text-7xl font-bold mb-8 text-primary-foreground tracking-tight">

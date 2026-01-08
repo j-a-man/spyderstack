@@ -1,7 +1,7 @@
 "use client"
 
 import { Header } from "@/components/header"
-import { NetworkBackground } from "@/components/network-background"
+import { ParticleAnimation } from "@/components/particle-animation"
 import { Footer } from "@/components/footer"
 
 export default function VSLPage() {
@@ -9,7 +9,7 @@ export default function VSLPage() {
     <main className="relative bg-background min-h-screen">
       {/* Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <NetworkBackground />
+        <ParticleAnimation />
       </div>
 
       <Header />

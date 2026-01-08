@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getTasks, addTask, updateTask, deleteTask } from '@/lib/storage';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const boardId = searchParams.get('boardId');
@@ -25,6 +27,7 @@ export async function POST(req: NextRequest) {
       boardId: body.boardId,
       priority: body.priority || 'medium',
       dueDate: body.dueDate || undefined,
+      assignees: [], // Default to empty
     });
     return NextResponse.json(newTask, { status: 201 });
   } catch (error) {

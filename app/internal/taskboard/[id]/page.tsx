@@ -1,4 +1,4 @@
-import { getTasks, getBoards } from '@/lib/storage';
+import { getTasks, getBoard } from '@/lib/storage';
 import { TaskBoard } from '@/components/internal/task-board';
 import { redirect } from 'next/navigation';
 
@@ -12,8 +12,7 @@ export default async function BoardPage({ params }: PageProps) {
   const { id } = await params;
   
   // Verify board exists
-  const boards = await getBoards();
-  const board = boards.find(b => b.id === id);
+  const board = await getBoard(id);
 
   if (!board) {
     redirect('/internal/taskboard');

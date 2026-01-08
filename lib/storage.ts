@@ -34,6 +34,20 @@ export async function getBoards(): Promise<Board[]> {
   })) as Board[];
 }
 
+export async function getBoard(id: string): Promise<Board | null> {
+  await connectToDatabase();
+  const board = await BoardModel.findOne({ id }).lean();
+  
+  if (!board) return null;
+
+  return {
+    ...board,
+    id: board.id,
+    _id: undefined,
+    __v: undefined
+  } as unknown as Board;
+}
+
 export async function createBoard(name: string): Promise<Board> {
   await connectToDatabase();
   const newBoard = await BoardModel.create({

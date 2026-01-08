@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getBoards, createBoard, updateBoard, deleteBoard } from '@/lib/storage';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const boards = await getBoards();
   return NextResponse.json(boards);

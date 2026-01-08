@@ -4,8 +4,13 @@ import { getBoards, createBoard, updateBoard, deleteBoard } from '@/lib/storage'
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const boards = await getBoards();
-  return NextResponse.json(boards);
+  try {
+    const boards = await getBoards();
+    return NextResponse.json(boards);
+  } catch (error) {
+    console.error('Failed to fetch boards:', error);
+    return NextResponse.json({ error: 'Failed to fetch boards' }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {

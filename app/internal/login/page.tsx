@@ -49,7 +49,8 @@ export default function LoginPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input
+              <div className="space-y-2">
+                <Input
                 id="password"
                 type="password"
                 placeholder="Enter password"
@@ -57,6 +58,8 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+              </div>
+              
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
           </CardContent>

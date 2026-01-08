@@ -19,7 +19,6 @@ export async function POST(req: NextRequest) {
       const cookieStore = await cookies();
       cookieStore.set('auth-token', 'authenticated', {
         httpOnly: true,
-        shouldConnectToDevTools: true, // for dev
         path: '/',
         maxAge: 60 * 60 * 24 * 7, // 1 week
         sameSite: 'lax'

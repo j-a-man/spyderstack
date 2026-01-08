@@ -5,9 +5,13 @@ export async function POST(req: NextRequest) {
   try {
     const { password } = await req.json();
     
-    // Simple environment variable check
-    // In a real app, you'd want something more robust
-    const correctPassword = process.env.INTERNAL_PASSWORD || 'admin';
+    // Environment variable check
+    const correctPassword = process.env.INTERNAL_PASSWORD;
+
+    if (!correctPassword) {
+      console.error("INTERNAL_PASSWORD is not defined");
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+    }
     
     if (password === correctPassword) {
       // Set the cookie

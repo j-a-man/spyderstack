@@ -19,7 +19,7 @@ const caseStudies = [
     results: { visits: "1.2k+", retention: "90%", rating: "5.0/5" },
     description: "A modern e-commerce store for premium skin care and home products, featuring a seamless shopping experience.",
     image: "/Reign.png",
-    link: "#"
+    link: "https://www.mebyreign.com/"
   },
   {
     category: "Pharmacy",
@@ -28,7 +28,7 @@ const caseStudies = [
     results: { visits: "680+", retention: "92%", rating: "5.0/5" },
     description: "A clean, fast, and user-friendly digital presence built to instill trust and help retain a growing client base.",
     image: "/AtlanticPharmacy.png",
-    link: "#"
+    link: "https://atlanticpharmacy.vercel.app/"
   },
   {
     category: "Pharmacy",
@@ -37,7 +37,7 @@ const caseStudies = [
     results: { visits: "850+", retention: "95%", rating: "5.0/5" },
     description: "A beautiful multipage website integrated with a patient-friendly chatbot, featuring modern design and functionality.",
     image: "/HealthGuardPharmacy.png",
-    link: "#"
+    link: "https://healthguardpharmacy.vercel.app/"
   },
   {
     category: "Real Estate",
@@ -46,16 +46,7 @@ const caseStudies = [
     results: { visits: "500+", retention: "98%", rating: "4.9/5" },
     description: "A captivating digital presence for a premium rental home, optimized for high conversion and seamless bookings.",
     image: "/blueoasis5512.png",
-    link: "#"
-  },
-  {
-    category: "Paving",
-    company: "Woolfolk Paving",
-    location: "Binghamton, NY",
-    results: { visits: "420+", retention: "88%", rating: "5.0/5" },
-    description: "A sleek and professional website redesign that effectively serves as the modern digital face of the business.",
-    image: null,
-    link: "#"
+    link: "https://blueoasis5512.vercel.app/"
   }
 ]
 
@@ -64,7 +55,7 @@ const categories = ["All", ...Array.from(new Set(caseStudies.map((s) => s.catego
 // 1. HERO SECTION
 function PortfolioHero() {
   return (
-    <section className="sticky top-0 z-0 min-h-[70vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden bg-background">
+    <section className="sticky top-0 z-0 min-h-[50vh] flex flex-col justify-center pt-32 pb-10 overflow-hidden bg-background">
       <ParticleAnimation />
 
       <div className="container mx-auto max-w-5xl relative z-10 px-6 text-center">
@@ -96,7 +87,7 @@ function CaseStudyGrid() {
   )
 
   return (
-    <section className="relative z-10 bg-background border-t border-foreground/5 py-24 min-h-screen">
+    <section className="relative z-10 bg-background pt-10 pb-24 min-h-screen">
       <div className="container mx-auto max-w-7xl px-6">
         
         {/* Filter Bar */}
@@ -119,9 +110,12 @@ function CaseStudyGrid() {
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredStudies.map((study, index) => (
-            <div
+            <a
               key={index}
-              className="group relative flex flex-col bg-slate-800/20 backdrop-blur-sm border border-foreground/10 rounded-2xl overflow-hidden hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-primary/10"
+              href={study.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative flex flex-col bg-slate-800/20 backdrop-blur-sm border border-foreground/10 rounded-2xl overflow-hidden hover:border-primary/40 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-primary/10 cursor-pointer"
             >
               {/* Thumbnail Container */}
               <div className="relative aspect-video w-full bg-foreground/5 overflow-hidden border-b border-foreground/10">
@@ -139,13 +133,12 @@ function CaseStudyGrid() {
                 )}
                 
                 {/* External Link Button Overlay */}
-                <a 
-                  href={study.link}
-                  className="absolute top-4 right-4 h-8 w-8 rounded-full bg-background/80 backdrop-blur border border-foreground/10 flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
+                <div 
+                  className="absolute top-4 right-4 h-8 w-8 rounded-full bg-background/80 backdrop-blur border border-foreground/10 flex items-center justify-center text-foreground group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-colors duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
                   aria-label={`Visit ${study.company} website`}
                 >
                   <ExternalLink className="w-4 h-4" />
-                </a>
+                </div>
               </div>
 
               <div className="flex flex-col flex-grow p-6">
@@ -180,7 +173,7 @@ function CaseStudyGrid() {
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -226,7 +219,6 @@ export default function PortfolioPage() {
       </div>
 
       <div className="relative z-20 bg-background border-t border-foreground/10 shadow-[0_-50px_100px_-20px_rgba(0,0,0,0.5)]">
-        <div className="h-[5vh] w-full pointer-events-none" />
         <CaseStudyGrid />
         <PortfolioCTA />
       </div>

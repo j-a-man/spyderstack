@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   // Check if the path starts with /internal
   if (request.nextUrl.pathname.startsWith('/internal')) {
     
@@ -10,19 +11,13 @@ export function proxy(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // Check for the auth cookie
-    const authToken = request.cookies.get('auth-token');
+    // Check for the NextAuth session token
+    // Note: You must ensure NEXTAUTH_SECRET is set in .env for this to work correctly in production
+    const token = await getToken({ req: request });
 
-    if (!authToken || authToken.value !== 'authenticated') {
-      // API routes return 401, pages redirect to login
-      if (request.nextUrl.pathname.startsWith('/api/')) {
-         // Assuming we might protect API routes later, though currently they are usually global or separate.
-         // But here we are protecting /internal pages. 
-         // If we wanted to protect /api/tasks we would add it to matcher or logic here.
-         // For now, let's just validte the page access.
-      }
-      
+    if (!token) {
       const loginUrl = new URL('/internal/login', request.url);
+      loginUrl.searchParams.set('callbackUrl', request.nextUrl.pathname);
       return NextResponse.redirect(loginUrl);
     }
   }

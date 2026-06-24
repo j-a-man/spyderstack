@@ -178,7 +178,6 @@ export default function ClientIntakePage() {
                                     <div className="space-y-2 group/input">
                                         <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Business Phone *</Label>
                                         <Input name="businessPhone" value={formData.businessPhone} onChange={handleChange} required placeholder="(888) 555-1234" className="bg-background/40 h-14 border-foreground/10 focus:border-primary rounded-none" />
-                                        <p className="text-[10px] text-primary/80 uppercase tracking-wider font-bold">Needs to be textable</p>
                                     </div>
                                     <div className="space-y-2 group/input">
                                         <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Business Email *</Label>

@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         const needLogo = formData.get('needLogo') as string
 
         const logoFile = formData.get('logo') as File | null
+        const photoFiles = formData.getAll('photos') as File[]
 
         // Basic validation
         if (!businessName || !fullName || !businessEmail) {
@@ -42,14 +43,24 @@ export async function POST(req: Request) {
             }
         })
 
-        // Prepare attachments if logo exists
+        // Prepare attachments if logo or photos exist
         const attachments = []
         if (logoFile) {
             const buffer = Buffer.from(await logoFile.arrayBuffer())
             attachments.push({
-                filename: logoFile.name,
+                filename: `logo_${logoFile.name}`,
                 content: buffer
             })
+        }
+
+        for (const file of photoFiles) {
+            if (file && file.size > 0) {
+                const buffer = Buffer.from(await file.arrayBuffer())
+                attachments.push({
+                    filename: file.name,
+                    content: buffer
+                })
+            }
         }
 
         // 1. Send Email to Admin (You)
@@ -94,6 +105,7 @@ export async function POST(req: Request) {
         --- BRANDING ---
         Need Logo Design: ${needLogo}
         Logo File: ${logoFile ? 'Attached' : 'Not Provided'}
+        Photos Uploaded: ${photoFiles.length} (${attachments.length - (logoFile ? 1 : 0)} files attached)
             `
         })
 

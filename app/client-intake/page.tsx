@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Mail, Phone, Clock, ArrowRight, Upload, Info } from "lucide-react"
+import { Mail, Phone, Clock, ArrowRight, Upload, Info, Trash2, Images } from "lucide-react"
 
 export default function ClientIntakePage() {
     // State for all form fields
@@ -39,8 +39,10 @@ export default function ClientIntakePage() {
     })
 
     const [logoFile, setLogoFile] = useState<File | null>(null)
+    const [photoFiles, setPhotoFiles] = useState<File[]>([])
     const [isSubmitting, setIsSubmitting] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const photosInputRef = useRef<HTMLInputElement>(null)
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -50,6 +52,17 @@ export default function ClientIntakePage() {
         if (e.target.files && e.target.files[0]) {
             setLogoFile(e.target.files[0])
         }
+    }
+
+    const handlePhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files) {
+            const selectedFiles = Array.from(e.target.files)
+            setPhotoFiles((prev) => [...prev, ...selectedFiles])
+        }
+    }
+
+    const removePhotoFile = (indexToRemove: number) => {
+        setPhotoFiles((prev) => prev.filter((_, idx) => idx !== indexToRemove))
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -63,10 +76,15 @@ export default function ClientIntakePage() {
                 data.append(key, value)
             })
 
-            // Append file if exists
+            // Append logo file if exists
             if (logoFile) {
                 data.append('logo', logoFile)
             }
+
+            // Append business/project photos
+            photoFiles.forEach((file) => {
+                data.append('photos', file)
+            })
 
             const response = await fetch('/api/client-intake', {
                 method: 'POST',
@@ -98,7 +116,9 @@ export default function ClientIntakePage() {
                     needLogo: "No",
                 })
                 setLogoFile(null)
+                setPhotoFiles([])
                 if (fileInputRef.current) fileInputRef.current.value = ""
+                if (photosInputRef.current) photosInputRef.current.value = ""
             } else {
                 const errorData = await response.json()
                 alert(`Transmission failed: ${errorData.error || "Unknown error"}`)
@@ -312,13 +332,78 @@ export default function ClientIntakePage() {
                                     </div>
                                 </div>
 
+                                <div className="mt-12 space-y-4">
+                                    <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground block">Business / Storefront / Product Photos</Label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div className="relative border-2 border-dashed border-foreground/20 hover:border-primary/50 transition-colors p-8 text-center bg-foreground/5 min-h-[12rem] flex flex-col items-center justify-center cursor-pointer animate-in fade-in duration-300"
+                                            onClick={() => photosInputRef.current?.click()}>
+                                            <Images className="w-8 h-8 text-muted-foreground mb-4" />
+                                            <span className="text-sm text-foreground/70 font-bold uppercase tracking-wide">Click to Upload Photos</span>
+                                            <span className="text-xs text-muted-foreground mt-2">Select multiple files (jpg, png, webp, etc.)</span>
+                                            <input
+                                                type="file"
+                                                ref={photosInputRef}
+                                                className="hidden"
+                                                accept="image/*"
+                                                multiple
+                                                onChange={handlePhotosChange}
+                                            />
+                                        </div>
+
+                                        <div className="border border-foreground/10 bg-background/20 p-4 min-h-[12rem] max-h-64 overflow-y-auto flex flex-col">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">
+                                                Selected Files ({photoFiles.length})
+                                            </span>
+                                            {photoFiles.length === 0 ? (
+                                                <div className="flex-1 flex items-center justify-center text-xs text-muted-foreground italic">
+                                                    No photos uploaded yet.
+                                                </div>
+                                            ) : (
+                                                <div className="space-y-2">
+                                                    {photoFiles.map((file, idx) => (
+                                                        <div key={idx} className="flex items-center justify-between bg-foreground/5 p-2 border border-foreground/10 animate-in slide-in-from-bottom-2 duration-200">
+                                                            <div className="flex flex-col min-w-0 pr-4">
+                                                                <span className="text-xs font-medium truncate text-foreground/90">{file.name}</span>
+                                                                <span className="text-[10px] text-muted-foreground">{(file.size / (1024 * 1024)).toFixed(2)} MB</span>
+                                                            </div>
+                                                            <button
+                                                                type="button"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation()
+                                                                    removePhotoFile(idx)
+                                                                }}
+                                                                className="text-muted-foreground hover:text-destructive transition-colors p-1"
+                                                            >
+                                                                <Trash2 className="w-4 h-4" />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                    {photoFiles.length > 0 && (
+                                        <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
+                                            <span className="text-muted-foreground">Total Upload Size:</span>
+                                            <span className={photoFiles.reduce((acc, file) => acc + file.size, 0) > 15 * 1024 * 1024 ? "text-destructive animate-pulse" : "text-primary"}>
+                                                {(photoFiles.reduce((acc, file) => acc + file.size, 0) / (1024 * 1024)).toFixed(2)} MB / 15.00 MB
+                                            </span>
+                                        </div>
+                                    )}
+                                    {photoFiles.reduce((acc, file) => acc + file.size, 0) > 15 * 1024 * 1024 && (
+                                        <p className="text-xs text-destructive font-bold uppercase tracking-wide">
+                                            Warning: Total file size exceeds 15MB. Please remove some photos to ensure reliable email delivery.
+                                        </p>
+                                    )}
+                                </div>
+
                                 <div className="mt-12 bg-primary/10 border border-primary/30 p-6 flex gap-4 items-start">
                                     <Info className="w-6 h-6 text-primary shrink-0 mt-1" />
                                     <div>
-                                        <h4 className="text-foreground font-bold uppercase tracking-wide mb-2">Photo Transfer Required</h4>
+                                        <h4 className="text-foreground font-bold uppercase tracking-wide mb-2">Photo Transfer Options</h4>
                                         <p className="text-muted-foreground text-sm leading-relaxed">
-                                            Please email <strong>as many photos</strong> of your business (storefront, interior, products, team, or projects) to <a href="mailto:spyderstack@gmail.com" className="text-primary hover:underline">spyderstack@gmail.com</a>.
-                                            Include a nice picture of yourself or your team so customers know who they will be interacting with.
+                                            You can upload your photos directly here. If you have additional files, or the batch exceeds the 15MB limit, you may still email them to <a href="mailto:spyderstack@gmail.com" className="text-primary hover:underline">spyderstack@gmail.com</a>.
+                                            Please include a nice picture of yourself or your team so customers know who they will be interacting with.
                                         </p>
                                     </div>
                                 </div>

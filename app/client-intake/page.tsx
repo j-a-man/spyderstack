@@ -166,7 +166,7 @@ export default function ClientIntakePage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2 group/input">
                                         <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Legal Business Name *</Label>
-                                        <Input name="businessName" value={formData.businessName} onChange={handleChange} required placeholder="John's Construction LLC" className="bg-background/40 h-14 border-foreground/10 focus:border-primary rounded-none" />
+                                        <Input name="businessName" value={formData.businessName} onChange={handleChange} required placeholder="e.g. Green Valley Pharmacy, Acme Corp" className="bg-background/40 h-14 border-foreground/10 focus:border-primary rounded-none" />
                                     </div>
                                     <div className="space-y-2 group/input">
                                         <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Full Name *</Label>
@@ -241,13 +241,13 @@ export default function ClientIntakePage() {
 
                                 <div className="space-y-8">
                                     <div className="space-y-2 group/input">
-                                        <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Service / Trade Category *</Label>
-                                        <Input name="serviceCategory" value={formData.serviceCategory} onChange={handleChange} required placeholder="e.g. Construction, Landscaping..." className="bg-background/40 h-14 border-foreground/10 focus:border-primary rounded-none" />
+                                        <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Industry / Business Category *</Label>
+                                        <Input name="serviceCategory" value={formData.serviceCategory} onChange={handleChange} required placeholder="e.g. Pharmacy, Retail, Construction..." className="bg-background/40 h-14 border-foreground/10 focus:border-primary rounded-none" />
                                     </div>
 
                                     <div className="space-y-2 group/input">
-                                        <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">All Services Offered (In Order of Preference) *</Label>
-                                        <Textarea name="servicesOffered" value={formData.servicesOffered} onChange={handleChange} required placeholder="sheetrock, painting, plumbing, electricity..." rows={4} className="bg-background/40 border-foreground/10 focus:border-primary rounded-none p-4" />
+                                        <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">All Services / Products Offered (In Order of Preference) *</Label>
+                                        <Textarea name="servicesOffered" value={formData.servicesOffered} onChange={handleChange} required placeholder="e.g. prescription fulfillment, immunizations, custom compounding..." rows={4} className="bg-background/40 border-foreground/10 focus:border-primary rounded-none p-4" />
                                     </div>
 
                                     <div className="space-y-2 group/input">
@@ -267,7 +267,7 @@ export default function ClientIntakePage() {
 
                                     <div className="space-y-2 group/input">
                                         <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Why Your Business Stands Out *</Label>
-                                        <Textarea name="standOutReasons" value={formData.standOutReasons} onChange={handleChange} required placeholder="Local Owned, Veteran Owned, Insured..." rows={3} className="bg-background/40 border-foreground/10 focus:border-primary rounded-none p-4" />
+                                        <Textarea name="standOutReasons" value={formData.standOutReasons} onChange={handleChange} required placeholder="e.g. Locally Owned, Drive-thru access, Family Owned, Insured..." rows={3} className="bg-background/40 border-foreground/10 focus:border-primary rounded-none p-4" />
                                     </div>
                                 </div>
                             </div>
@@ -317,8 +317,8 @@ export default function ClientIntakePage() {
                                     <div>
                                         <h4 className="text-foreground font-bold uppercase tracking-wide mb-2">Photo Transfer Required</h4>
                                         <p className="text-muted-foreground text-sm leading-relaxed">
-                                            Please email at least <strong>20 photos</strong> of your work to <a href="mailto:spyderstack@gmail.com" className="text-primary hover:underline">spyderstack@gmail.com</a>.
-                                            Include a nice picture of yourself or your team so customers know who they will be working with.
+                                            Please email <strong>as many photos</strong> of your business (storefront, interior, products, team, or projects) to <a href="mailto:spyderstack@gmail.com" className="text-primary hover:underline">spyderstack@gmail.com</a>.
+                                            Include a nice picture of yourself or your team so customers know who they will be interacting with.
                                         </p>
                                     </div>
                                 </div>

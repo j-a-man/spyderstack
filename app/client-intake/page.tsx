@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Mail, Phone, Clock, ArrowRight, Upload, Info, Trash2, Images } from "lucide-react"
+import { Mail, Phone, Clock, ArrowRight, Upload, Info, Trash2, Images, Check } from "lucide-react"
 
 export default function ClientIntakePage() {
     // State for all form fields
@@ -41,8 +41,39 @@ export default function ClientIntakePage() {
     const [logoFile, setLogoFile] = useState<File | null>(null)
     const [photoFiles, setPhotoFiles] = useState<File[]>([])
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
     const photosInputRef = useRef<HTMLInputElement>(null)
+
+    const handleReset = () => {
+        setFormData({
+            businessName: "",
+            fullName: "",
+            businessPhone: "",
+            businessEmail: "",
+            address: "",
+            city: "",
+            state: "",
+            postalCode: "",
+            instagram: "",
+            facebook: "",
+            bbb: "",
+            tiktok: "",
+            serviceCategory: "",
+            servicesOffered: "",
+            aboutUs: "",
+            businessHours: "",
+            areasServed: "",
+            standOutReasons: "",
+            needLogo: "No",
+        })
+        setLogoFile(null)
+        setPhotoFiles([])
+        if (fileInputRef.current) fileInputRef.current.value = ""
+        if (photosInputRef.current) photosInputRef.current.value = ""
+        setIsSubmitted(false)
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -92,33 +123,8 @@ export default function ClientIntakePage() {
             })
 
             if (response.ok) {
-                alert("Transmission received. We have your details securely logged.")
-                // Reset form
-                setFormData({
-                    businessName: "",
-                    fullName: "",
-                    businessPhone: "",
-                    businessEmail: "",
-                    address: "",
-                    city: "",
-                    state: "",
-                    postalCode: "",
-                    instagram: "",
-                    facebook: "",
-                    bbb: "",
-                    tiktok: "",
-                    serviceCategory: "",
-                    servicesOffered: "",
-                    aboutUs: "",
-                    businessHours: "",
-                    areasServed: "",
-                    standOutReasons: "",
-                    needLogo: "No",
-                })
-                setLogoFile(null)
-                setPhotoFiles([])
-                if (fileInputRef.current) fileInputRef.current.value = ""
-                if (photosInputRef.current) photosInputRef.current.value = ""
+                setIsSubmitted(true)
+                window.scrollTo({ top: 0, behavior: "smooth" })
             } else {
                 const errorData = await response.json()
                 alert(`Transmission failed: ${errorData.error || "Unknown error"}`)
@@ -131,8 +137,116 @@ export default function ClientIntakePage() {
         }
     }
 
+    if (isSubmitted) {
+        return (
+            <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
+                {/* Fixed Background */}
+                <div className="fixed inset-0 z-0 pointer-events-none">
+                    <NetworkBackground />
+                </div>
+
+                <Header />
+
+                {/* 1. HERO LAYER */}
+                <section className="sticky top-0 z-0 min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden bg-background">
+                    <ParticleAnimation />
+
+                    <div className="container mx-auto max-w-7xl text-center relative z-10 px-6">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-foreground/5 border border-foreground/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+                            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                            <span className="text-sm font-bold tracking-widest uppercase text-foreground/80">
+                                System Ingestion
+                            </span>
+                        </div>
+
+                        <h1 className="font-display text-6xl md:text-8xl font-bold text-foreground mb-8 tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-100">
+                            CLIENT <br /> <span className="text-primary">INTAKE</span>.
+                        </h1>
+
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+                            Form successfully submitted.
+                        </p>
+                    </div>
+                </section>
+
+                {/* 2. CONTENT LAYER */}
+                <div className="relative z-10 bg-background border-t border-foreground/10 shadow-[0_-50px_100px_-20px_rgba(0,0,0,0.5)]">
+                    <div className="h-[10vh] w-full pointer-events-none" />
+
+                    <div className="container mx-auto max-w-5xl px-6 pb-32 pt-12">
+                        <div className="bg-foreground/5 border border-foreground/10 p-8 md:p-12 relative overflow-hidden group transition-all hover:border-primary/30 backdrop-blur-sm shadow-2xl">
+                            <div className="absolute top-0 left-0 w-full h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                            <div className="py-12 flex flex-col items-center text-center animate-in fade-in duration-500">
+                                <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary flex items-center justify-center mb-8 animate-pulse">
+                                    <span className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                        <Check className="w-8 h-8 text-primary" />
+                                    </span>
+                                </div>
+
+                                <h2 className="font-display text-4xl font-bold tracking-widest text-foreground uppercase mb-4">
+                                    Transmission <span className="text-primary">Successful</span>
+                                </h2>
+                                
+                                <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed mb-8 text-sm">
+                                    Your data packet has been successfully ingested into our system. We have securely logged your business details, social links, and uploaded files. Our team will begin deploying your digital infrastructure shortly.
+                                </p>
+
+                                <div className="max-w-md w-full border border-foreground/10 bg-background/30 p-6 mb-12 text-left space-y-4">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block border-b border-foreground/10 pb-2">
+                                        Transmission Details
+                                    </span>
+                                    <div className="flex justify-between text-xs">
+                                        <span className="text-muted-foreground uppercase">Status:</span>
+                                        <span className="text-primary font-bold uppercase tracking-widest">ACTIVE / PROCESSING</span>
+                                    </div>
+                                    <div className="flex justify-between text-xs">
+                                        <span className="text-muted-foreground uppercase">Recipient:</span>
+                                        <span className="text-foreground/90 font-medium">SpyderStack Onboarding</span>
+                                    </div>
+                                    <div className="flex justify-between text-xs">
+                                        <span className="text-muted-foreground uppercase">Attachments:</span>
+                                        <span className="text-foreground/90 font-medium">
+                                            {logoFile ? "Logo Attached" : "None"}, {photoFiles.length} Photos
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <Button 
+                                    onClick={handleReset}
+                                    className="w-full max-w-sm h-16 text-md rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-lg hover:shadow-[0_0_30px_-5px_var(--primary)] transition-all duration-300 hover:-translate-y-1"
+                                >
+                                    Submit Another Packet
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                    <Footer />
+                </div>
+            </main>
+        )
+    }
+
     return (
         <main className="relative min-h-screen bg-background selection:bg-primary selection:text-foreground">
+            {/* Loading Overlay */}
+            {isSubmitting && (
+                <div className="fixed inset-0 z-50 flex flex-col justify-center items-center bg-background/80 backdrop-blur-md animate-in fade-in duration-300">
+                    <div className="relative flex flex-col items-center">
+                        <div className="w-24 h-24 rounded-full border border-primary/30 flex items-center justify-center animate-pulse duration-1000 mb-6">
+                            <span className="w-16 h-16 rounded-full border border-primary/50 flex items-center justify-center animate-spin duration-1000">
+                                <span className="w-3 h-3 rounded-full bg-primary" />
+                            </span>
+                        </div>
+                        <h3 className="font-display text-lg font-bold tracking-widest text-foreground uppercase animate-pulse">
+                            Ingesting Data Packet
+                        </h3>
+                        <p className="text-xs text-muted-foreground mt-2 uppercase tracking-widest">
+                            Uploading and encrypting files. Please hold...
+                        </p>
+                    </div>
+                </div>
+            )}
+
             {/* Fixed Background */}
             <div className="fixed inset-0 z-0 pointer-events-none">
                 <NetworkBackground />
@@ -385,14 +499,15 @@ export default function ClientIntakePage() {
                                     {photoFiles.length > 0 && (
                                         <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
                                             <span className="text-muted-foreground">Total Upload Size:</span>
-                                            <span className={photoFiles.reduce((acc, file) => acc + file.size, 0) > 15 * 1024 * 1024 ? "text-destructive animate-pulse" : "text-primary"}>
-                                                {(photoFiles.reduce((acc, file) => acc + file.size, 0) / (1024 * 1024)).toFixed(2)} MB / 15.00 MB
+                                            <span className="text-primary">
+                                                {(photoFiles.reduce((acc, file) => acc + file.size, 0) / (1024 * 1024)).toFixed(2)} MB
                                             </span>
                                         </div>
                                     )}
                                     {photoFiles.reduce((acc, file) => acc + file.size, 0) > 15 * 1024 * 1024 && (
-                                        <p className="text-xs text-destructive font-bold uppercase tracking-wide">
-                                            Warning: Total file size exceeds 15MB. Please remove some photos to ensure reliable email delivery.
+                                        <p className="text-xs text-primary/80 font-bold uppercase tracking-wide flex items-center gap-1.5 mt-2 bg-primary/10 border border-primary/20 p-2.5 animate-pulse">
+                                            <Info className="w-4 h-4 text-primary shrink-0" />
+                                            <span>Notice: Total size exceeds 15MB. Photos will automatically be split into multiple emails for reliable delivery.</span>
                                         </p>
                                     )}
                                 </div>

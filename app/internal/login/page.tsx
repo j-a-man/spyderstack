@@ -16,6 +16,12 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!password.trim()) {
+      setError('Password is required');
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -45,7 +51,7 @@ export default function LoginPage() {
           <CardTitle>Internal Access</CardTitle>
           <CardDescription>Please enter the password to continue.</CardDescription>
         </CardHeader>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
@@ -55,8 +61,11 @@ export default function LoginPage() {
                 type="password"
                 placeholder="Enter password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (error) setError('');
+                }}
+                className={error ? "border-red-500/80 focus:border-red-500 focus-visible:ring-red-500" : ""}
               />
               </div>
               

@@ -40,6 +40,18 @@ export default function SchedulePage() {
         email: "",
         company: ""
     })
+    const [errors, setErrors] = useState<Record<string, string>>({})
+
+    const handleInputChange = (field: string, value: string) => {
+        setFormData(prev => ({ ...prev, [field]: value }))
+        if (errors[field]) {
+            setErrors(prev => {
+                const updated = { ...prev }
+                delete updated[field]
+                return updated
+            })
+        }
+    }
 
     const dates = getDates()
 
@@ -61,6 +73,30 @@ export default function SchedulePage() {
 
     const handleBooking = async (e: React.FormEvent) => {
         e.preventDefault()
+
+        // Custom validation check
+        const newErrors: Record<string, string> = {}
+        if (!formData.name.trim()) newErrors.name = "Full name is required"
+        if (!formData.company.trim()) newErrors.company = "Company name is required"
+        
+        if (!formData.email.trim()) {
+            newErrors.email = "Work email is required"
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = "Please enter a valid email address"
+        }
+
+        setErrors(newErrors)
+        const isValid = Object.keys(newErrors).length === 0
+
+        if (!isValid) {
+            const firstErrorKey = Object.keys(newErrors)[0]
+            const errorElement = document.getElementsByName(firstErrorKey)[0]
+            if (errorElement) {
+                errorElement.focus()
+            }
+            return
+        }
+
         setLoading(true)
 
         try {
@@ -256,37 +292,40 @@ export default function SchedulePage() {
                                     <div className="animate-in fade-in slide-in-from-right-8 duration-500">
                                         <h3 className="font-display text-2xl font-bold text-foreground mb-6">CONTACT DETAILS</h3>
 
-                                        <form onSubmit={handleBooking} className="space-y-6">
+                                        <form onSubmit={handleBooking} noValidate className="space-y-6">
                                             <div className="space-y-2">
                                                 <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Full Name</Label>
                                                 <Input
-                                                    required
-                                                    className="bg-muted/50 border-border h-12 focus:border-primary rounded-none text-foreground"
+                                                    name="name"
+                                                    className={`bg-muted/50 h-12 focus:border-primary rounded-none text-foreground transition-colors ${errors.name ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-border"}`}
                                                     placeholder="Enter your name"
                                                     value={formData.name}
-                                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                    onChange={(e) => handleInputChange("name", e.target.value)}
                                                 />
+                                                {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.name}</p>}
                                             </div>
                                             <div className="space-y-2">
                                                 <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Work Email</Label>
                                                 <Input
-                                                    required
+                                                    name="email"
                                                     type="email"
-                                                    className="bg-muted/50 border-border h-12 focus:border-primary rounded-none text-foreground"
+                                                    className={`bg-muted/50 h-12 focus:border-primary rounded-none text-foreground transition-colors ${errors.email ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-border"}`}
                                                     placeholder="name@company.com"
                                                     value={formData.email}
-                                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                    onChange={(e) => handleInputChange("email", e.target.value)}
                                                 />
+                                                {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.email}</p>}
                                             </div>
                                             <div className="space-y-2">
                                                 <Label className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Company Name</Label>
                                                 <Input
-                                                    required
-                                                    className="bg-muted/50 border-border h-12 focus:border-primary rounded-none text-foreground"
+                                                    name="company"
+                                                    className={`bg-muted/50 h-12 focus:border-primary rounded-none text-foreground transition-colors ${errors.company ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-border"}`}
                                                     placeholder="Your Company Ltd."
                                                     value={formData.company}
-                                                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                                                    onChange={(e) => handleInputChange("company", e.target.value)}
                                                 />
+                                                {errors.company && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.company}</p>}
                                             </div>
 
                                             <div className="pt-4 flex gap-4">

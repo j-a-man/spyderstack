@@ -24,6 +24,7 @@ import {
 export default function BoardSelectionPage() {
   const [boards, setBoards] = useState<Board[]>([]);
   const [newBoardName, setNewBoardName] = useState('');
+  const [boardNameError, setBoardNameError] = useState('');
   const [loading, setLoading] = useState(true);
   const [createOpen, setCreateOpen] = useState(false);
   const [creating, setCreating] = useState(false);
@@ -47,7 +48,10 @@ export default function BoardSelectionPage() {
 
   const handleCreateBoard = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newBoardName.trim()) return;
+    if (!newBoardName.trim()) {
+        setBoardNameError('Board name is required');
+        return;
+    }
     
     setCreating(true);
     try {
@@ -62,6 +66,7 @@ export default function BoardSelectionPage() {
             setBoards([...boards, newBoard]);
             setCreateOpen(false);
             setNewBoardName('');
+            setBoardNameError('');
         }
     } finally {
         setCreating(false);
@@ -94,7 +99,13 @@ export default function BoardSelectionPage() {
     <div className="container mx-auto py-10 px-4">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Your Task Boards</h1>
-        <Dialog open={createOpen} onOpenChange={setCreateOpen}>
+        <Dialog open={createOpen} onOpenChange={(open) => {
+            setCreateOpen(open);
+            if (!open) {
+                setNewBoardName('');
+                setBoardNameError('');
+            }
+        }}>
             <DialogTrigger asChild>
                 <Button>Create Board</Button>
             </DialogTrigger>
@@ -102,16 +113,20 @@ export default function BoardSelectionPage() {
                 <DialogHeader>
                     <DialogTitle>Create New Board</DialogTitle>
                 </DialogHeader>
-                <form onSubmit={handleCreateBoard} className="space-y-4 py-4">
+                <form onSubmit={handleCreateBoard} noValidate className="space-y-4 py-4">
                     <div className="space-y-2">
                         <Label htmlFor="name">Board Name</Label>
                         <Input 
                             id="name" 
                             value={newBoardName} 
-                            onChange={(e) => setNewBoardName(e.target.value)} 
+                            onChange={(e) => {
+                                setNewBoardName(e.target.value);
+                                if (boardNameError) setBoardNameError('');
+                            }} 
                             placeholder="e.g., Marketing, Engineering"
-                            required
+                            className={boardNameError ? "border-red-500/80 focus:border-red-500 focus-visible:ring-red-500" : ""}
                         />
+                        {boardNameError && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{boardNameError}</p>}
                     </div>
                     <DialogFooter>
                         <Button type="submit" disabled={creating}>

@@ -21,9 +21,48 @@ export default function ContactPage() {
     industry: "",
     message: "",
   })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const name = e.target.name
+    setFormData((prev) => ({ ...prev, [name]: e.target.value }))
+    if (errors[name]) {
+      setErrors((prev) => {
+        const updated = { ...prev }
+        delete updated[name]
+        return updated
+      })
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Custom validation check
+    const newErrors: Record<string, string> = {}
+    if (!formData.name.trim()) newErrors.name = "Name is required"
+    if (!formData.message.trim()) newErrors.message = "Message is required"
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required"
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address"
+    }
+
+    setErrors(newErrors)
+    const isValid = Object.keys(newErrors).length === 0
+
+    if (!isValid) {
+      const firstErrorKey = Object.keys(newErrors)[0]
+      const errorElement = document.getElementById(firstErrorKey)
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: "smooth", block: "center" })
+        setTimeout(() => {
+          errorElement.focus({ preventScroll: true })
+        }, 400)
+      }
+      return
+    }
 
     try {
       const response = await fetch('/api/contact', {
@@ -37,6 +76,7 @@ export default function ContactPage() {
       if (response.ok) {
         alert("Transmission received. Our engineers will respond within 24 hours.")
         setFormData({ name: "", email: "", phone: "", company: "", industry: "", message: "" })
+        setErrors({})
       } else {
         alert("Transmission failed. Please try again.")
       }
@@ -44,10 +84,6 @@ export default function ContactPage() {
       console.error("Error submitting form:", error)
       alert("Transmission failed. Please try again.")
     }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   return (
@@ -100,7 +136,7 @@ export default function ContactPage() {
                   <span className="text-primary text-lg">01.</span> CONTACT US
                 </h2>
 
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleSubmit} noValidate className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-2 group/input">
                       <Label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-muted-foreground group-hover/input:text-primary transition-colors">Name *</Label>
@@ -109,10 +145,10 @@ export default function ContactPage() {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        required
                         placeholder="John Smith"
-                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
+                        className={`bg-background/40 h-14 rounded-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5 ${errors.name ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-foreground/10 focus:border-primary"}`}
                       />
+                      {errors.name && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.name}</p>}
                     </div>
                     <div className="space-y-2 group/input">
                       <Label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-muted-foreground group-hover/input:text-primary transition-colors">Email *</Label>
@@ -122,10 +158,10 @@ export default function ContactPage() {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        required
                         placeholder="john@example.com"
-                        className="bg-background/40 border-foreground/10 h-14 focus:border-primary rounded-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5"
+                        className={`bg-background/40 h-14 rounded-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5 ${errors.email ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-foreground/10 focus:border-primary"}`}
                       />
+                      {errors.email && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.email}</p>}
                     </div>
                   </div>
 
@@ -181,11 +217,11 @@ export default function ContactPage() {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      required
                       placeholder="Tell us about your business infrastructure..."
                       rows={5}
-                      className="bg-background/40 border-foreground/10 focus:border-primary rounded-none resize-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5 p-4"
+                      className={`bg-background/40 rounded-none resize-none text-foreground placeholder:text-foreground/20 transition-all duration-300 focus:bg-foreground/5 p-4 ${errors.message ? "border-red-500/60 focus:border-red-500 focus-visible:ring-red-500" : "border-foreground/10 focus:border-primary"}`}
                     />
+                    {errors.message && <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-1">{errors.message}</p>}
                   </div>
 
                   <Button type="submit" className="w-full h-16 text-lg rounded-none bg-primary hover:bg-primary/90 text-white uppercase tracking-widest font-bold shadow-lg hover:shadow-[0_0_30px_-5px_var(--primary)] transition-all duration-300 hover:-translate-y-1">
